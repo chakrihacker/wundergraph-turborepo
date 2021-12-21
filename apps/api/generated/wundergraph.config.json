@@ -1,0 +1,2545 @@
+{
+  "apiName": "api",
+  "apiId": "",
+  "deploymentName": "main",
+  "environmentIds": [
+    ""
+  ],
+  "api": {
+    "enableGraphqlEndpoint": false,
+    "operations": [
+      {
+        "content": "query Dragons {\n  spacex_dragons {\n    name\n    active\n  }\n}",
+        "name": "Dragons",
+        "responseSchema": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"spacex_dragons\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"active\":{\"type\":\"boolean\"}},\"additionalProperties\":false}}},\"additionalProperties\":false}},\"additionalProperties\":false}",
+        "variablesSchema": "{\"type\":\"object\",\"properties\":{},\"additionalProperties\":false}",
+        "operationType": 0,
+        "cacheConfig": {
+          "enable": false,
+          "maxAge": 60,
+          "public": true,
+          "staleWhileRevalidate": 60
+        },
+        "authenticationConfig": {
+          "authRequired": false
+        },
+        "authorizationConfig": {
+          "claims": [],
+          "roleConfig": {
+            "requireMatchAll": [],
+            "requireMatchAny": [],
+            "denyMatchAll": [],
+            "denyMatchAny": []
+          }
+        },
+        "liveQueryConfig": {
+          "enable": true,
+          "pollingIntervalSeconds": 1
+        },
+        "hooksConfiguration": {
+          "preResolve": false,
+          "postResolve": false,
+          "mutatingPreResolve": false,
+          "mutatingPostResolve": false,
+          "mockResolve": {
+            "enable": false,
+            "subscriptionPollingIntervalMillis": 0
+          }
+        },
+        "variablesConfiguration": {
+          "injectVariables": []
+        },
+        "internal": false
+      },
+      {
+        "content": "query Missions($find: spacex_MissionsFind) {\n  spacex_missions(find: $find) {\n    id\n    name\n    manufacturers\n  }\n}",
+        "name": "Missions",
+        "responseSchema": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"spacex_missions\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"manufacturers\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}},\"additionalProperties\":false}}},\"additionalProperties\":false}},\"additionalProperties\":false}",
+        "variablesSchema": "{\"type\":\"object\",\"properties\":{\"find\":{\"additionalProperties\":false,\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"manufacturer\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"payload_id\":{\"type\":\"string\"}}}},\"additionalProperties\":false}",
+        "operationType": 0,
+        "cacheConfig": {
+          "enable": false,
+          "maxAge": 60,
+          "public": true,
+          "staleWhileRevalidate": 60
+        },
+        "authenticationConfig": {
+          "authRequired": false
+        },
+        "authorizationConfig": {
+          "claims": [],
+          "roleConfig": {
+            "requireMatchAll": [],
+            "requireMatchAny": [],
+            "denyMatchAll": [],
+            "denyMatchAny": []
+          }
+        },
+        "liveQueryConfig": {
+          "enable": true,
+          "pollingIntervalSeconds": 1
+        },
+        "hooksConfiguration": {
+          "preResolve": false,
+          "postResolve": false,
+          "mutatingPreResolve": false,
+          "mutatingPostResolve": false,
+          "mockResolve": {
+            "enable": false,
+            "subscriptionPollingIntervalMillis": 0
+          }
+        },
+        "variablesConfiguration": {
+          "injectVariables": []
+        },
+        "internal": false
+      }
+    ],
+    "engineConfiguration": {
+      "defaultFlushInterval": 500,
+      "graphqlSchema": "directive @fromClaim(name: Claim) on VARIABLE_DEFINITION\n\ndirective @hooksVariable on VARIABLE_DEFINITION\n\ndirective @jsonSchema(\n  \"\"\"\n  The value of both of these keywords MUST be a string.\n  \n  Both of these keywords can be used to decorate a user interface with\n  information about the data produced by this user interface.  A title\n  will preferably be short, whereas a description will provide\n  explanation about the purpose of the instance described by this\n  schema.\n  \"\"\"\n  title: String\n  \"\"\"\n  The value of both of these keywords MUST be a string.\n  \n  Both of these keywords can be used to decorate a user interface with\n  information about the data produced by this user interface.  A title\n  will preferably be short, whereas a description will provide\n  explanation about the purpose of the instance described by this\n  schema.\n  \"\"\"\n  description: String\n  \"\"\"\n  The value of \"multipleOf\" MUST be a number, strictly greater than 0.\n  \n  A numeric instance is valid only if division by this keyword's value\n  results in an integer.\n  \"\"\"\n  multipleOf: Int\n  \"\"\"\n  The value of \"maximum\" MUST be a number, representing an inclusive\n  upper limit for a numeric instance.\n  \n  If the instance is a number, then this keyword validates only if the\n  instance is less than or exactly equal to \"maximum\".\n  \"\"\"\n  maximum: Int\n  \"\"\"\n  The value of \"exclusiveMaximum\" MUST be number, representing an\n  exclusive upper limit for a numeric instance.\n  \n  If the instance is a number, then the instance is valid only if it\n  has a value strictly less than (not equal to) \"exclusiveMaximum\".\n  \"\"\"\n  exclusiveMaximum: Int\n  \"\"\"\n  The value of \"minimum\" MUST be a number, representing an inclusive\n  lower limit for a numeric instance.\n  \n  If the instance is a number, then this keyword validates only if the\n  instance is greater than or exactly equal to \"minimum\".\n  \"\"\"\n  minimum: Int\n  \"\"\"\n  The value of \"exclusiveMinimum\" MUST be number, representing an\n  exclusive lower limit for a numeric instance.\n  \n  If the instance is a number, then the instance is valid only if it\n  has a value strictly greater than (not equal to) \"exclusiveMinimum\".\n  \"\"\"\n  exclusiveMinimum: Int\n  \"\"\"\n  The value of this keyword MUST be a non-negative integer.\n  \n  A string instance is valid against this keyword if its length is less\n  than, or equal to, the value of this keyword.\n  \n  The length of a string instance is defined as the number of its\n  characters as defined by RFC 7159 [RFC7159].\n  \"\"\"\n  maxLength: Int\n  \"\"\"\n  The value of this keyword MUST be a non-negative integer.\n  \n  A string instance is valid against this keyword if its length is\n  greater than, or equal to, the value of this keyword.\n  \n  The length of a string instance is defined as the number of its\n  characters as defined by RFC 7159 [RFC7159].\n  \n  Omitting this keyword has the same behavior as a value of 0.\n  \"\"\"\n  minLength: Int\n  \"\"\"\n  The value of this keyword MUST be a string.  This string SHOULD be a\n  valid regular expression, according to the ECMA 262 regular\n  expression dialect.\n  \n  A string instance is considered valid if the regular expression\n  matches the instance successfully.  Recall: regular expressions are\n  not implicitly anchored.\n  \"\"\"\n  pattern: String\n  \"\"\"\n  The value of this keyword MUST be a non-negative integer.\n  \n  An array instance is valid against \"maxItems\" if its size is less\n  than, or equal to, the value of this keyword.\n  \"\"\"\n  maxItems: Int\n  \"\"\"\n  The value of this keyword MUST be a non-negative integer.\n  \n  An array instance is valid against \"minItems\" if its size is greater\n  than, or equal to, the value of this keyword.\n  \n  Omitting this keyword has the same behavior as a value of 0.\n  \"\"\"\n  minItems: Int\n  \"\"\"\n  The value of this keyword MUST be a boolean.\n  \n  If this keyword has boolean value false, the instance validates\n  successfully.  If it has boolean value true, the instance validates\n  successfully if all of its elements are unique.\n  \n  Omitting this keyword has the same behavior as a value of false.\n  \"\"\"\n  uniqueItems: Boolean\n  commonPattern: COMMON_REGEX_PATTERN\n) on VARIABLE_DEFINITION\n\ndirective @rbac(\n  \"\"\"the user must match all roles\"\"\"\n  requireMatchAll: [WG_ROLE]\n  \"\"\"the user must match at least one of the roles\"\"\"\n  requireMatchAny: [WG_ROLE]\n  \"\"\"the user must not match all of the roles\"\"\"\n  denyMatchAll: [WG_ROLE]\n  \"\"\"the user must not match any of the roles\"\"\"\n  denyMatchAny: [WG_ROLE]\n) on QUERY | MUTATION | SUBSCRIPTION\n\n\"\"\"\nThe directive @injectCurrentDateTime injects a DateTime string of the current date and time into the variable.\nThis variable MUST be a string compatible scalar. \n\nThe default format, is: ISO 8601\nIf no format is chosen, the default format is used.\nCustom formats are allowed by specifying a format conforming to the Golang specification for specifying a date time format.\n\"\"\"\ndirective @injectCurrentDateTime(\n  format: WunderGraphDateTimeFormat = ISO8601\n  \"\"\"\n  customFormat must conform to the Golang specification for specifying a date time format\n  \"\"\"\n  customFormat: String\n) on VARIABLE_DEFINITION\n\n\"\"\"\nThe directive @injectGeneratedUUID injects a generated UUID into the variable.\nThis variable MUST be a string.\nAt the same time, it removes the variable from the input definition,\ndisallowing the user to supply it.\n\nThis means, the UUID is 100% generated server-side and can be considered untempered.\n\"\"\"\ndirective @injectGeneratedUUID on VARIABLE_DEFINITION\n\n\"\"\"\nThe @internalOperation Directive marks an Operation as internal.\nBy doing so, the Operation is no longer accessible from the public API.\nIt can only be accessed by internal services, like hooks.\n\"\"\"\ndirective @internalOperation on QUERY | MUTATION | SUBSCRIPTION\n\n\"\"\"\nThe directive @injectEnvironmentVariable allows you to inject an environment variable into the variable definition.\n\"\"\"\ndirective @injectEnvironmentVariable(name: String!) on VARIABLE_DEFINITION\n\ntype Query {\n  \"\"\"\n  fetch data from the table: \"users\"\n  \"\"\"\n  spacex_users(\n    \"\"\"distinct select on columns\"\"\"\n    distinct_on: [spacex_users_select_column!]\n    \"\"\"limit the nuber of rows returned\"\"\"\n    limit: Int\n    \"\"\"skip the first n rows. Use only with order_by\"\"\"\n    offset: Int\n    \"\"\"sort the rows by one or more columns\"\"\"\n    order_by: [spacex_users_order_by!]\n    \"\"\"filter the rows returned\"\"\"\n    where: spacex_users_bool_exp\n  ): [spacex_users!]!\n  \"\"\"\n  fetch aggregated fields from the table: \"users\"\n  \"\"\"\n  spacex_users_aggregate(\n    \"\"\"distinct select on columns\"\"\"\n    distinct_on: [spacex_users_select_column!]\n    \"\"\"limit the nuber of rows returned\"\"\"\n    limit: Int\n    \"\"\"skip the first n rows. Use only with order_by\"\"\"\n    offset: Int\n    \"\"\"sort the rows by one or more columns\"\"\"\n    order_by: [spacex_users_order_by!]\n    \"\"\"filter the rows returned\"\"\"\n    where: spacex_users_bool_exp\n  ): spacex_users_aggregate!\n  \"\"\"fetch data from the table: \"users\" using primary key columns\"\"\"\n  spacex_users_by_pk(id: spacex_uuid!): spacex_users\n  spacex_capsules(find: spacex_CapsulesFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Capsule]\n  spacex_capsulesPast(find: spacex_CapsulesFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Capsule]\n  spacex_capsulesUpcoming(find: spacex_CapsulesFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Capsule]\n  spacex_capsule(id: ID!): spacex_Capsule\n  spacex_company: spacex_Info\n  spacex_cores(find: spacex_CoresFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Core]\n  spacex_coresPast(find: spacex_CoresFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Core]\n  spacex_coresUpcoming(find: spacex_CoresFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Core]\n  spacex_core(id: ID!): spacex_Core\n  spacex_dragons(limit: Int, offset: Int): [spacex_Dragon]\n  spacex_dragon(id: ID!): spacex_Dragon\n  spacex_histories(find: spacex_HistoryFind, limit: Int, offset: Int, order: String, sort: String): [spacex_History]\n  spacex_historiesResult(find: spacex_HistoryFind, limit: Int, offset: Int, order: String, sort: String): spacex_HistoriesResult\n  spacex_history(id: ID!): spacex_History\n  spacex_landpads(limit: Int, offset: Int): [spacex_Landpad]\n  spacex_landpad(id: ID!): spacex_Landpad\n  spacex_launches(find: spacex_LaunchFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Launch]\n  spacex_launchesPast(find: spacex_LaunchFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Launch]\n  spacex_launchesPastResult(find: spacex_LaunchFind, limit: Int, offset: Int, order: String, sort: String): spacex_LaunchesPastResult\n  spacex_launchesUpcoming(find: spacex_LaunchFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Launch]\n  spacex_launch(id: ID!): spacex_Launch\n  spacex_launchLatest(offset: Int): spacex_Launch\n  spacex_launchNext(offset: Int): spacex_Launch\n  spacex_launchpads(limit: Int, offset: Int): [spacex_Launchpad]\n  spacex_launchpad(id: ID!): spacex_Launchpad\n  spacex_missions(find: spacex_MissionsFind, limit: Int, offset: Int): [spacex_Mission]\n  spacex_missionsResult(find: spacex_MissionsFind, limit: Int, offset: Int): spacex_MissionResult\n  spacex_mission(id: ID!): spacex_Mission\n  spacex_payloads(find: spacex_PayloadsFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Payload]\n  spacex_payload(id: ID!): spacex_Payload\n  spacex_roadster: spacex_Roadster\n  spacex_rockets(limit: Int, offset: Int): [spacex_Rocket]\n  spacex_rocketsResult(limit: Int, offset: Int): spacex_RocketsResult\n  spacex_rocket(id: ID!): spacex_Rocket\n  spacex_ships(find: spacex_ShipsFind, limit: Int, offset: Int, order: String, sort: String): [spacex_Ship]\n  spacex_shipsResult(find: spacex_ShipsFind, limit: Int, offset: Int, order: String, sort: String): spacex_ShipsResult\n  spacex_ship(id: ID!): spacex_Ship\n}\n\n\"\"\"\nselect columns of table \"users\"\n\"\"\"\nenum spacex_users_select_column {\n  \"\"\"column name\"\"\"\n  id\n  \"\"\"column name\"\"\"\n  name\n  \"\"\"column name\"\"\"\n  rocket\n  \"\"\"column name\"\"\"\n  timestamp\n  \"\"\"column name\"\"\"\n  twitter\n}\n\n\"\"\"\nordering options when selecting data from \"users\"\n\"\"\"\ninput spacex_users_order_by {\n  id: spacex_order_by\n  name: spacex_order_by\n  rocket: spacex_order_by\n  timestamp: spacex_order_by\n  twitter: spacex_order_by\n}\n\n\"\"\"column ordering options\"\"\"\nenum spacex_order_by {\n  \"\"\"in the ascending order, nulls last\"\"\"\n  asc\n  \"\"\"in the ascending order, nulls first\"\"\"\n  asc_nulls_first\n  \"\"\"in the ascending order, nulls last\"\"\"\n  asc_nulls_last\n  \"\"\"in the descending order, nulls first\"\"\"\n  desc\n  \"\"\"in the descending order, nulls first\"\"\"\n  desc_nulls_first\n  \"\"\"in the descending order, nulls last\"\"\"\n  desc_nulls_last\n}\n\n\"\"\"\nBoolean expression to filter rows from the table \"users\". All fields are combined with a logical 'AND'.\n\"\"\"\ninput spacex_users_bool_exp {\n  _and: [spacex_users_bool_exp]\n  _not: spacex_users_bool_exp\n  _or: [spacex_users_bool_exp]\n  id: spacex_uuid_comparison_exp\n  name: spacex_String_comparison_exp\n  rocket: spacex_String_comparison_exp\n  timestamp: spacex_timestamptz_comparison_exp\n  twitter: spacex_String_comparison_exp\n}\n\n\"\"\"\nexpression to compare columns of type uuid. All fields are combined with logical 'AND'.\n\"\"\"\ninput spacex_uuid_comparison_exp {\n  _eq: spacex_uuid\n  _gt: spacex_uuid\n  _gte: spacex_uuid\n  _in: [spacex_uuid!]\n  _is_null: Boolean\n  _lt: spacex_uuid\n  _lte: spacex_uuid\n  _neq: spacex_uuid\n  _nin: [spacex_uuid!]\n}\n\nscalar spacex_uuid\n\n\"\"\"\nexpression to compare columns of type String. All fields are combined with logical 'AND'.\n\"\"\"\ninput spacex_String_comparison_exp {\n  _eq: String\n  _gt: String\n  _gte: String\n  _ilike: String\n  _in: [String!]\n  _is_null: Boolean\n  _like: String\n  _lt: String\n  _lte: String\n  _neq: String\n  _nilike: String\n  _nin: [String!]\n  _nlike: String\n  _nsimilar: String\n  _similar: String\n}\n\n\"\"\"\nexpression to compare columns of type timestamptz. All fields are combined with logical 'AND'.\n\"\"\"\ninput spacex_timestamptz_comparison_exp {\n  _eq: spacex_timestamptz\n  _gt: spacex_timestamptz\n  _gte: spacex_timestamptz\n  _in: [spacex_timestamptz!]\n  _is_null: Boolean\n  _lt: spacex_timestamptz\n  _lte: spacex_timestamptz\n  _neq: spacex_timestamptz\n  _nin: [spacex_timestamptz!]\n}\n\nscalar spacex_timestamptz\n\n\"\"\"\ncolumns and relationships of \"users\"\n\"\"\"\ntype spacex_users {\n  id: spacex_uuid!\n  name: String\n  rocket: String\n  timestamp: spacex_timestamptz!\n  twitter: String\n}\n\n\"\"\"\naggregated selection of \"users\"\n\"\"\"\ntype spacex_users_aggregate {\n  aggregate: spacex_users_aggregate_fields\n  nodes: [spacex_users!]!\n}\n\n\"\"\"\naggregate fields of \"users\"\n\"\"\"\ntype spacex_users_aggregate_fields {\n  count(columns: [spacex_users_select_column!], distinct: Boolean): Int\n  max: spacex_users_max_fields\n  min: spacex_users_min_fields\n}\n\n\"\"\"aggregate max on columns\"\"\"\ntype spacex_users_max_fields {\n  name: String\n  rocket: String\n  timestamp: spacex_timestamptz\n  twitter: String\n}\n\n\"\"\"aggregate min on columns\"\"\"\ntype spacex_users_min_fields {\n  name: String\n  rocket: String\n  timestamp: spacex_timestamptz\n  twitter: String\n}\n\n\"\"\"\"\"\"\ninput spacex_CapsulesFind {\n  id: ID\n  landings: Int\n  mission: String\n  original_launch: spacex_Date\n  reuse_count: Int\n  status: String\n  type: String\n}\n\nscalar spacex_Date\n\ntype spacex_Capsule {\n  id: ID\n  landings: Int\n  missions: [spacex_CapsuleMission]\n  original_launch: spacex_Date\n  reuse_count: Int\n  status: String\n  type: String\n  dragon: spacex_Dragon\n}\n\ntype spacex_CapsuleMission {\n  flight: Int\n  name: String\n}\n\ntype spacex_Dragon {\n  active: Boolean\n  crew_capacity: Int\n  description: String\n  diameter: spacex_Distance\n  dry_mass_kg: Int\n  dry_mass_lb: Int\n  first_flight: String\n  heat_shield: spacex_DragonHeatShield\n  height_w_trunk: spacex_Distance\n  id: ID\n  launch_payload_mass: spacex_Mass\n  launch_payload_vol: spacex_Volume\n  name: String\n  orbit_duration_yr: Int\n  pressurized_capsule: spacex_DragonPressurizedCapsule\n  return_payload_mass: spacex_Mass\n  return_payload_vol: spacex_Volume\n  sidewall_angle_deg: Float\n  thrusters: [spacex_DragonThrust]\n  trunk: spacex_DragonTrunk\n  type: String\n  wikipedia: String\n}\n\ntype spacex_Distance {\n  feet: Float\n  meters: Float\n}\n\ntype spacex_DragonHeatShield {\n  dev_partner: String\n  material: String\n  size_meters: Float\n  temp_degrees: Int\n}\n\ntype spacex_Mass {\n  kg: Int\n  lb: Int\n}\n\ntype spacex_Volume {\n  cubic_feet: Int\n  cubic_meters: Int\n}\n\ntype spacex_DragonPressurizedCapsule {\n  payload_volume: spacex_Volume\n}\n\ntype spacex_DragonThrust {\n  amount: Int\n  fuel_1: String\n  fuel_2: String\n  pods: Int\n  thrust: spacex_Force\n  type: String\n}\n\ntype spacex_Force {\n  kN: Float\n  lbf: Float\n}\n\ntype spacex_DragonTrunk {\n  cargo: spacex_DragonTrunkCargo\n  trunk_volume: spacex_Volume\n}\n\ntype spacex_DragonTrunkCargo {\n  solar_array: Int\n  unpressurized_cargo: Boolean\n}\n\ntype spacex_Info {\n  ceo: String\n  coo: String\n  cto_propulsion: String\n  cto: String\n  employees: Int\n  founded: Int\n  founder: String\n  headquarters: spacex_Address\n  launch_sites: Int\n  links: spacex_InfoLinks\n  name: String\n  summary: String\n  test_sites: Int\n  valuation: Float\n  vehicles: Int\n}\n\ntype spacex_Address {\n  address: String\n  city: String\n  state: String\n}\n\ntype spacex_InfoLinks {\n  elon_twitter: String\n  flickr: String\n  twitter: String\n  website: String\n}\n\n\"\"\"\"\"\"\ninput spacex_CoresFind {\n  asds_attempts: Int\n  asds_landings: Int\n  block: Int\n  id: String\n  missions: String\n  original_launch: spacex_Date\n  reuse_count: Int\n  rtls_attempts: Int\n  rtls_landings: Int\n  status: String\n  water_landing: Boolean\n}\n\ntype spacex_Core {\n  asds_attempts: Int\n  asds_landings: Int\n  block: Int\n  id: ID\n  missions: [spacex_CapsuleMission]\n  original_launch: spacex_Date\n  reuse_count: Int\n  rtls_attempts: Int\n  rtls_landings: Int\n  status: String\n  water_landing: Boolean\n}\n\n\"\"\"\"\"\"\ninput spacex_HistoryFind {\n  end: spacex_Date\n  flight_number: Int\n  id: ID\n  start: spacex_Date\n}\n\ntype spacex_History {\n  details: String\n  event_date_unix: spacex_Date\n  event_date_utc: spacex_Date\n  id: ID\n  links: spacex_Link\n  title: String\n  flight: spacex_Launch\n}\n\ntype spacex_Link {\n  article: String\n  reddit: String\n  wikipedia: String\n}\n\ntype spacex_Launch {\n  details: String\n  id: ID\n  is_tentative: Boolean\n  launch_date_local: spacex_Date\n  launch_date_unix: spacex_Date\n  launch_date_utc: spacex_Date\n  launch_site: spacex_LaunchSite\n  launch_success: Boolean\n  launch_year: String\n  links: spacex_LaunchLinks\n  mission_id: [String]\n  mission_name: String\n  rocket: spacex_LaunchRocket\n  static_fire_date_unix: spacex_Date\n  static_fire_date_utc: spacex_Date\n  telemetry: spacex_LaunchTelemetry\n  tentative_max_precision: String\n  upcoming: Boolean\n  ships: [spacex_Ship]\n}\n\ntype spacex_LaunchSite {\n  site_id: String\n  site_name_long: String\n  site_name: String\n}\n\ntype spacex_LaunchLinks {\n  article_link: String\n  flickr_images: [String]\n  mission_patch_small: String\n  mission_patch: String\n  presskit: String\n  reddit_campaign: String\n  reddit_launch: String\n  reddit_media: String\n  reddit_recovery: String\n  video_link: String\n  wikipedia: String\n}\n\ntype spacex_LaunchRocket {\n  fairings: spacex_LaunchRocketFairings\n  first_stage: spacex_LaunchRocketFirstStage\n  rocket_name: String\n  rocket_type: String\n  rocket: spacex_Rocket\n  second_stage: spacex_LaunchRocketSecondStage\n}\n\ntype spacex_LaunchRocketFairings {\n  recovered: Boolean\n  recovery_attempt: Boolean\n  reused: Boolean\n  ship: String\n}\n\ntype spacex_LaunchRocketFirstStage {\n  cores: [spacex_LaunchRocketFirstStageCore]\n}\n\ntype spacex_LaunchRocketFirstStageCore {\n  block: Int\n  core: spacex_Core\n  flight: Int\n  gridfins: Boolean\n  land_success: Boolean\n  landing_intent: Boolean\n  landing_type: String\n  landing_vehicle: String\n  legs: Boolean\n  reused: Boolean\n}\n\ntype spacex_Rocket {\n  active: Boolean\n  boosters: Int\n  company: String\n  cost_per_launch: Int\n  country: String\n  description: String\n  diameter: spacex_Distance\n  engines: spacex_RocketEngines\n  first_flight: spacex_Date\n  first_stage: spacex_RocketFirstStage\n  height: spacex_Distance\n  id: ID\n  landing_legs: spacex_RocketLandingLegs\n  mass: spacex_Mass\n  name: String\n  payload_weights: [spacex_RocketPayloadWeight]\n  second_stage: spacex_RocketSecondStage\n  stages: Int\n  success_rate_pct: Int\n  type: String\n  wikipedia: String\n}\n\ntype spacex_RocketEngines {\n  number: Int\n  type: String\n  version: String\n  layout: String\n  engine_loss_max: String\n  propellant_1: String\n  propellant_2: String\n  thrust_sea_level: spacex_Force\n  thrust_vacuum: spacex_Force\n  thrust_to_weight: Float\n}\n\ntype spacex_RocketFirstStage {\n  burn_time_sec: Int\n  engines: Int\n  fuel_amount_tons: Float\n  reusable: Boolean\n  thrust_sea_level: spacex_Force\n  thrust_vacuum: spacex_Force\n}\n\ntype spacex_RocketLandingLegs {\n  number: Int\n  material: String\n}\n\ntype spacex_RocketPayloadWeight {\n  id: String\n  kg: Int\n  lb: Int\n  name: String\n}\n\ntype spacex_RocketSecondStage {\n  burn_time_sec: Int\n  engines: Int\n  fuel_amount_tons: Float\n  payloads: spacex_RocketSecondStagePayloads\n  thrust: spacex_Force\n}\n\ntype spacex_RocketSecondStagePayloads {\n  option_1: String\n  composite_fairing: spacex_RocketSecondStagePayloadCompositeFairing\n}\n\ntype spacex_RocketSecondStagePayloadCompositeFairing {\n  height: spacex_Distance\n  diameter: spacex_Distance\n}\n\ntype spacex_LaunchRocketSecondStage {\n  block: Int\n  payloads: [spacex_Payload]\n}\n\ntype spacex_Payload {\n  customers: [String]\n  id: ID\n  manufacturer: String\n  nationality: String\n  norad_id: [Int]\n  orbit_params: spacex_PayloadOrbitParams\n  orbit: String\n  payload_mass_kg: Float\n  payload_mass_lbs: Float\n  payload_type: String\n  reused: Boolean\n}\n\ntype spacex_PayloadOrbitParams {\n  apoapsis_km: Float\n  arg_of_pericenter: Float\n  eccentricity: Float\n  epoch: spacex_Date\n  inclination_deg: Float\n  lifespan_years: Float\n  longitude: Float\n  mean_anomaly: Float\n  mean_motion: Float\n  periapsis_km: Float\n  period_min: Float\n  raan: Float\n  reference_system: String\n  regime: String\n  semi_major_axis_km: Float\n}\n\ntype spacex_LaunchTelemetry {\n  flight_club: String\n}\n\ntype spacex_Ship {\n  abs: Int\n  active: Boolean\n  attempted_landings: Int\n  class: Int\n  course_deg: Int\n  home_port: String\n  id: ID\n  image: String\n  imo: Int\n  missions: [spacex_ShipMission]\n  mmsi: Int\n  model: String\n  name: String\n  position: spacex_ShipLocation\n  roles: [String]\n  speed_kn: Float\n  status: String\n  successful_landings: Int\n  type: String\n  url: String\n  weight_kg: Int\n  weight_lbs: Int\n  year_built: Int\n}\n\ntype spacex_ShipMission {\n  flight: String\n  name: String\n}\n\ntype spacex_ShipLocation {\n  latitude: Float\n  longitude: Float\n}\n\ntype spacex_HistoriesResult {\n  result: spacex_Result\n  data: [spacex_History]\n}\n\ntype spacex_Result {\n  totalCount: Int\n}\n\ntype spacex_Landpad {\n  attempted_landings: String\n  details: String\n  full_name: String\n  id: ID\n  landing_type: String\n  location: spacex_Location\n  status: String\n  successful_landings: String\n  wikipedia: String\n}\n\ntype spacex_Location {\n  latitude: Float\n  longitude: Float\n  name: String\n  region: String\n}\n\n\"\"\"\"\"\"\ninput spacex_LaunchFind {\n  apoapsis_km: Float\n  block: Int\n  cap_serial: String\n  capsule_reuse: String\n  core_flight: Int\n  core_reuse: String\n  core_serial: String\n  customer: String\n  eccentricity: Float\n  end: spacex_Date\n  epoch: spacex_Date\n  fairings_recovered: String\n  fairings_recovery_attempt: String\n  fairings_reuse: String\n  fairings_reused: String\n  fairings_ship: String\n  gridfins: String\n  id: ID\n  inclination_deg: Float\n  land_success: String\n  landing_intent: String\n  landing_type: String\n  landing_vehicle: String\n  launch_date_local: spacex_Date\n  launch_date_utc: spacex_Date\n  launch_success: String\n  launch_year: String\n  legs: String\n  lifespan_years: Float\n  longitude: Float\n  manufacturer: String\n  mean_motion: Float\n  mission_id: String\n  mission_name: String\n  nationality: String\n  norad_id: Int\n  orbit: String\n  payload_id: String\n  payload_type: String\n  periapsis_km: Float\n  period_min: Float\n  raan: Float\n  reference_system: String\n  regime: String\n  reused: String\n  rocket_id: String\n  rocket_name: String\n  rocket_type: String\n  second_stage_block: String\n  semi_major_axis_km: Float\n  ship: String\n  side_core1_reuse: String\n  side_core2_reuse: String\n  site_id: String\n  site_name_long: String\n  site_name: String\n  start: spacex_Date\n  tbd: String\n  tentative_max_precision: String\n  tentative: String\n}\n\ntype spacex_LaunchesPastResult {\n  result: spacex_Result\n  data: [spacex_Launch]\n}\n\ntype spacex_Launchpad {\n  attempted_launches: Int\n  details: String\n  id: ID\n  location: spacex_Location\n  name: String\n  status: String\n  successful_launches: Int\n  vehicles_launched: [spacex_Rocket]\n  wikipedia: String\n}\n\n\"\"\"\"\"\"\ninput spacex_MissionsFind {\n  id: ID\n  manufacturer: String\n  name: String\n  payload_id: String\n}\n\ntype spacex_Mission {\n  description: String\n  id: ID\n  manufacturers: [String]\n  name: String\n  twitter: String\n  website: String\n  wikipedia: String\n  payloads: [spacex_Payload]\n}\n\ntype spacex_MissionResult {\n  result: spacex_Result\n  data: [spacex_Mission]\n}\n\n\"\"\"\"\"\"\ninput spacex_PayloadsFind {\n  apoapsis_km: Float\n  customer: String\n  eccentricity: Float\n  epoch: spacex_Date\n  inclination_deg: Float\n  lifespan_years: Float\n  longitude: Float\n  manufacturer: String\n  mean_motion: Float\n  nationality: String\n  norad_id: Int\n  orbit: String\n  payload_id: ID\n  payload_type: String\n  periapsis_km: Float\n  period_min: Float\n  raan: Float\n  reference_system: String\n  regime: String\n  reused: Boolean\n  semi_major_axis_km: Float\n}\n\ntype spacex_Roadster {\n  apoapsis_au: Float\n  details: String\n  earth_distance_km: Float\n  earth_distance_mi: Float\n  eccentricity: Float\n  epoch_jd: Float\n  inclination: Float\n  launch_date_unix: spacex_Date\n  launch_date_utc: spacex_Date\n  launch_mass_kg: Int\n  launch_mass_lbs: Int\n  longitude: Float\n  mars_distance_km: Float\n  mars_distance_mi: Float\n  name: String\n  norad_id: Int\n  orbit_type: Float\n  periapsis_arg: Float\n  periapsis_au: Float\n  period_days: Float\n  semi_major_axis_au: Float\n  speed_kph: Float\n  speed_mph: Float\n  wikipedia: String\n}\n\ntype spacex_RocketsResult {\n  result: spacex_Result\n  data: [spacex_Rocket]\n}\n\n\"\"\"\"\"\"\ninput spacex_ShipsFind {\n  id: ID\n  name: String\n  model: String\n  type: String\n  role: String\n  active: Boolean\n  imo: Int\n  mmsi: Int\n  abs: Int\n  class: Int\n  weight_lbs: Int\n  weight_kg: Int\n  year_built: Int\n  home_port: String\n  status: String\n  speed_kn: Int\n  course_deg: Int\n  latitude: Float\n  longitude: Float\n  successful_landings: Int\n  attempted_landings: Int\n  mission: String\n}\n\ntype spacex_ShipsResult {\n  result: spacex_Result\n  data: [spacex_Ship]\n}\n\ntype Mutation {\n  \"\"\"\n  delete data from the table: \"users\"\n  \"\"\"\n  spacex_delete_users(\n    \"\"\"filter the rows which have to be deleted\"\"\"\n    where: spacex_users_bool_exp!\n  ): spacex_users_mutation_response\n  \"\"\"\n  insert data into the table: \"users\"\n  \"\"\"\n  spacex_insert_users(\n    \"\"\"the rows to be inserted\"\"\"\n    objects: [spacex_users_insert_input!]!\n    \"\"\"on conflict condition\"\"\"\n    on_conflict: spacex_users_on_conflict\n  ): spacex_users_mutation_response\n  \"\"\"\n  update data of the table: \"users\"\n  \"\"\"\n  spacex_update_users(\n    \"\"\"sets the columns of the filtered rows to the given values\"\"\"\n    _set: spacex_users_set_input\n    \"\"\"filter the rows which have to be updated\"\"\"\n    where: spacex_users_bool_exp!\n  ): spacex_users_mutation_response\n}\n\n\"\"\"\nresponse of any mutation on the table \"users\"\n\"\"\"\ntype spacex_users_mutation_response {\n  \"\"\"number of affected rows by the mutation\"\"\"\n  affected_rows: Int!\n  \"\"\"data of the affected rows by the mutation\"\"\"\n  returning: [spacex_users!]!\n}\n\n\"\"\"\ninput type for inserting data into table \"users\"\n\"\"\"\ninput spacex_users_insert_input {\n  id: spacex_uuid\n  name: String\n  rocket: String\n  timestamp: spacex_timestamptz\n  twitter: String\n}\n\n\"\"\"\non conflict condition type for table \"users\"\n\"\"\"\ninput spacex_users_on_conflict {\n  constraint: spacex_users_constraint!\n  update_columns: [spacex_users_update_column!]!\n}\n\n\"\"\"\nunique or primary key constraints on table \"users\"\n\"\"\"\nenum spacex_users_constraint {\n  \"\"\"unique or primary key constraint\"\"\"\n  users_pkey\n}\n\n\"\"\"\nupdate columns of table \"users\"\n\"\"\"\nenum spacex_users_update_column {\n  \"\"\"column name\"\"\"\n  id\n  \"\"\"column name\"\"\"\n  name\n  \"\"\"column name\"\"\"\n  rocket\n  \"\"\"column name\"\"\"\n  timestamp\n  \"\"\"column name\"\"\"\n  twitter\n}\n\n\"\"\"\ninput type for updating data in table \"users\"\n\"\"\"\ninput spacex_users_set_input {\n  id: spacex_uuid\n  name: String\n  rocket: String\n  timestamp: spacex_timestamptz\n  twitter: String\n}\n\ntype Subscription {\n  \"\"\"\n  fetch data from the table: \"users\"\n  \"\"\"\n  spacex_users(\n    \"\"\"distinct select on columns\"\"\"\n    distinct_on: [spacex_users_select_column!]\n    \"\"\"limit the nuber of rows returned\"\"\"\n    limit: Int\n    \"\"\"skip the first n rows. Use only with order_by\"\"\"\n    offset: Int\n    \"\"\"sort the rows by one or more columns\"\"\"\n    order_by: [spacex_users_order_by!]\n    \"\"\"filter the rows returned\"\"\"\n    where: spacex_users_bool_exp\n  ): [spacex_users!]!\n  \"\"\"\n  fetch aggregated fields from the table: \"users\"\n  \"\"\"\n  spacex_users_aggregate(\n    \"\"\"distinct select on columns\"\"\"\n    distinct_on: [spacex_users_select_column!]\n    \"\"\"limit the nuber of rows returned\"\"\"\n    limit: Int\n    \"\"\"skip the first n rows. Use only with order_by\"\"\"\n    offset: Int\n    \"\"\"sort the rows by one or more columns\"\"\"\n    order_by: [spacex_users_order_by!]\n    \"\"\"filter the rows returned\"\"\"\n    where: spacex_users_bool_exp\n  ): spacex_users_aggregate!\n  \"\"\"fetch data from the table: \"users\" using primary key columns\"\"\"\n  spacex_users_by_pk(id: spacex_uuid!): spacex_users\n}\n\n\"\"\"conflict action\"\"\"\nenum spacex_conflict_action {\n  \"\"\"ignore the insert on this row\"\"\"\n  ignore\n  \"\"\"update the row with the given values\"\"\"\n  update\n}\n\n\"\"\"\norder by aggregate values of table \"users\"\n\"\"\"\ninput spacex_users_aggregate_order_by {\n  count: spacex_order_by\n  max: spacex_users_max_order_by\n  min: spacex_users_min_order_by\n}\n\n\"\"\"\norder by max() on columns of table \"users\"\n\"\"\"\ninput spacex_users_max_order_by {\n  name: spacex_order_by\n  rocket: spacex_order_by\n  timestamp: spacex_order_by\n  twitter: spacex_order_by\n}\n\n\"\"\"\norder by min() on columns of table \"users\"\n\"\"\"\ninput spacex_users_min_order_by {\n  name: spacex_order_by\n  rocket: spacex_order_by\n  timestamp: spacex_order_by\n  twitter: spacex_order_by\n}\n\n\"\"\"\ninput type for inserting array relation for remote table \"users\"\n\"\"\"\ninput spacex_users_arr_rel_insert_input {\n  data: [spacex_users_insert_input!]!\n  on_conflict: spacex_users_on_conflict\n}\n\n\"\"\"\ninput type for inserting object relation for remote table \"users\"\n\"\"\"\ninput spacex_users_obj_rel_insert_input {\n  data: spacex_users_insert_input!\n  on_conflict: spacex_users_on_conflict\n}\n\nscalar spacex_ObjectID\n\ntype spacex_CoreMission {\n  name: String\n  flight: Int\n}\n\nenum Claim {\n  EMAIL\n  EMAIL_VERIFIED\n  NAME\n  NICKNAME\n  LOCATION\n  PROVIDER\n}\n\nenum COMMON_REGEX_PATTERN {\n  EMAIL\n  DOMAIN\n}\n\nenum WG_ROLE {\n  admin\n  user\n}\n\nenum WunderGraphDateTimeFormat {\n  \"\"\"2006-01-02T15:04:05-0700\"\"\"\n  ISO8601\n  \"\"\"Mon Jan _2 15:04:05 2006\"\"\"\n  ANSIC\n  \"\"\"Mon Jan _2 15:04:05 MST 2006\"\"\"\n  UnixDate\n  \"\"\"Mon Jan 02 15:04:05 -0700 2006\"\"\"\n  RubyDate\n  \"\"\"02 Jan 06 15:04 MST\"\"\"\n  RFC822\n  \"\"\"02 Jan 06 15:04 -0700\"\"\"\n  RFC822Z\n  \"\"\"Monday, 02-Jan-06 15:04:05 MST\"\"\"\n  RFC850\n  \"\"\"Mon, 02 Jan 2006 15:04:05 MST\"\"\"\n  RFC1123\n  \"\"\"Mon, 02 Jan 2006 15:04:05 -0700\"\"\"\n  RFC1123Z\n  \"\"\"2006-01-02T15:04:05Z07:00\"\"\"\n  RFC3339\n  \"\"\"2006-01-02T15:04:05.999999999Z07:00\"\"\"\n  RFC3339Nano\n  \"\"\"3:04PM\"\"\"\n  Kitchen\n  \"\"\"Jan _2 15:04:05\"\"\"\n  Stamp\n  \"\"\"Jan _2 15:04:05.000\"\"\"\n  StampMilli\n  \"\"\"Jan _2 15:04:05.000000\"\"\"\n  StampMicro\n  \"\"\"Jan _2 15:04:05.000000000\"\"\"\n  StampNano\n}",
+      "datasourceConfigurations": [
+        {
+          "kind": 2,
+          "customGraphql": {
+            "fetch": {
+              "url": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "staticVariableContent": "https://api.spacex.land/graphql/"
+              },
+              "method": 1,
+              "body": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "staticVariableContent": ""
+              },
+              "header": {},
+              "query": []
+            },
+            "federation": {
+              "enabled": false,
+              "serviceSdl": ""
+            },
+            "subscription": {
+              "enabled": true,
+              "url": {
+                "kind": 0,
+                "environmentVariableDefaultValue": "",
+                "environmentVariableName": "",
+                "staticVariableContent": "wss://api.spacex.land/graphql/"
+              }
+            },
+            "upstreamSchema": "type Query {\n  \"\"\"\n  fetch data from the table: \"users\"\n  \"\"\"\n  users(\n    \"\"\"distinct select on columns\"\"\"\n    distinct_on: [users_select_column!]\n\n    \"\"\"limit the nuber of rows returned\"\"\"\n    limit: Int\n\n    \"\"\"skip the first n rows. Use only with order_by\"\"\"\n    offset: Int\n\n    \"\"\"sort the rows by one or more columns\"\"\"\n    order_by: [users_order_by!]\n\n    \"\"\"filter the rows returned\"\"\"\n    where: users_bool_exp\n  ): [users!]!\n\n  \"\"\"\n  fetch aggregated fields from the table: \"users\"\n  \"\"\"\n  users_aggregate(\n    \"\"\"distinct select on columns\"\"\"\n    distinct_on: [users_select_column!]\n\n    \"\"\"limit the nuber of rows returned\"\"\"\n    limit: Int\n\n    \"\"\"skip the first n rows. Use only with order_by\"\"\"\n    offset: Int\n\n    \"\"\"sort the rows by one or more columns\"\"\"\n    order_by: [users_order_by!]\n\n    \"\"\"filter the rows returned\"\"\"\n    where: users_bool_exp\n  ): users_aggregate!\n\n  \"\"\"fetch data from the table: \"users\" using primary key columns\"\"\"\n  users_by_pk(id: uuid!): users\n\n  \"\"\"\"\"\"\n  capsules(find: CapsulesFind, limit: Int, offset: Int, order: String, sort: String): [Capsule]\n\n  \"\"\"\"\"\"\n  capsulesPast(find: CapsulesFind, limit: Int, offset: Int, order: String, sort: String): [Capsule]\n\n  \"\"\"\"\"\"\n  capsulesUpcoming(find: CapsulesFind, limit: Int, offset: Int, order: String, sort: String): [Capsule]\n\n  \"\"\"\"\"\"\n  capsule(id: ID!): Capsule\n\n  \"\"\"\"\"\"\n  company: Info\n\n  \"\"\"\"\"\"\n  cores(find: CoresFind, limit: Int, offset: Int, order: String, sort: String): [Core]\n\n  \"\"\"\"\"\"\n  coresPast(find: CoresFind, limit: Int, offset: Int, order: String, sort: String): [Core]\n\n  \"\"\"\"\"\"\n  coresUpcoming(find: CoresFind, limit: Int, offset: Int, order: String, sort: String): [Core]\n\n  \"\"\"\"\"\"\n  core(id: ID!): Core\n\n  \"\"\"\"\"\"\n  dragons(limit: Int, offset: Int): [Dragon]\n\n  \"\"\"\"\"\"\n  dragon(id: ID!): Dragon\n\n  \"\"\"\"\"\"\n  histories(find: HistoryFind, limit: Int, offset: Int, order: String, sort: String): [History]\n\n  \"\"\"\"\"\"\n  historiesResult(find: HistoryFind, limit: Int, offset: Int, order: String, sort: String): HistoriesResult\n\n  \"\"\"\"\"\"\n  history(id: ID!): History\n\n  \"\"\"\"\"\"\n  landpads(limit: Int, offset: Int): [Landpad]\n\n  \"\"\"\"\"\"\n  landpad(id: ID!): Landpad\n\n  \"\"\"\"\"\"\n  launches(find: LaunchFind, limit: Int, offset: Int, order: String, sort: String): [Launch]\n\n  \"\"\"\"\"\"\n  launchesPast(find: LaunchFind, limit: Int, offset: Int, order: String, sort: String): [Launch]\n\n  \"\"\"\"\"\"\n  launchesPastResult(find: LaunchFind, limit: Int, offset: Int, order: String, sort: String): LaunchesPastResult\n\n  \"\"\"\"\"\"\n  launchesUpcoming(find: LaunchFind, limit: Int, offset: Int, order: String, sort: String): [Launch]\n\n  \"\"\"\"\"\"\n  launch(id: ID!): Launch\n\n  \"\"\"\"\"\"\n  launchLatest(offset: Int): Launch\n\n  \"\"\"\"\"\"\n  launchNext(offset: Int): Launch\n\n  \"\"\"\"\"\"\n  launchpads(limit: Int, offset: Int): [Launchpad]\n\n  \"\"\"\"\"\"\n  launchpad(id: ID!): Launchpad\n\n  \"\"\"\"\"\"\n  missions(find: MissionsFind, limit: Int, offset: Int): [Mission]\n\n  \"\"\"\"\"\"\n  missionsResult(find: MissionsFind, limit: Int, offset: Int): MissionResult\n\n  \"\"\"\"\"\"\n  mission(id: ID!): Mission\n\n  \"\"\"\"\"\"\n  payloads(find: PayloadsFind, limit: Int, offset: Int, order: String, sort: String): [Payload]\n\n  \"\"\"\"\"\"\n  payload(id: ID!): Payload\n\n  \"\"\"\"\"\"\n  roadster: Roadster\n\n  \"\"\"\"\"\"\n  rockets(limit: Int, offset: Int): [Rocket]\n\n  \"\"\"\"\"\"\n  rocketsResult(limit: Int, offset: Int): RocketsResult\n\n  \"\"\"\"\"\"\n  rocket(id: ID!): Rocket\n\n  \"\"\"\"\"\"\n  ships(find: ShipsFind, limit: Int, offset: Int, order: String, sort: String): [Ship]\n\n  \"\"\"\"\"\"\n  shipsResult(find: ShipsFind, limit: Int, offset: Int, order: String, sort: String): ShipsResult\n\n  \"\"\"\"\"\"\n  ship(id: ID!): Ship\n}\n\n\"\"\"\nselect columns of table \"users\"\n\"\"\"\nenum users_select_column {\n  \"\"\"column name\"\"\"\n  id\n\n  \"\"\"column name\"\"\"\n  name\n\n  \"\"\"column name\"\"\"\n  rocket\n\n  \"\"\"column name\"\"\"\n  timestamp\n\n  \"\"\"column name\"\"\"\n  twitter\n}\n\n\"\"\"\nordering options when selecting data from \"users\"\n\"\"\"\ninput users_order_by {\n  \"\"\"\"\"\"\n  id: order_by\n\n  \"\"\"\"\"\"\n  name: order_by\n\n  \"\"\"\"\"\"\n  rocket: order_by\n\n  \"\"\"\"\"\"\n  timestamp: order_by\n\n  \"\"\"\"\"\"\n  twitter: order_by\n}\n\n\"\"\"column ordering options\"\"\"\nenum order_by {\n  \"\"\"in the ascending order, nulls last\"\"\"\n  asc\n\n  \"\"\"in the ascending order, nulls first\"\"\"\n  asc_nulls_first\n\n  \"\"\"in the ascending order, nulls last\"\"\"\n  asc_nulls_last\n\n  \"\"\"in the descending order, nulls first\"\"\"\n  desc\n\n  \"\"\"in the descending order, nulls first\"\"\"\n  desc_nulls_first\n\n  \"\"\"in the descending order, nulls last\"\"\"\n  desc_nulls_last\n}\n\n\"\"\"\nBoolean expression to filter rows from the table \"users\". All fields are combined with a logical 'AND'.\n\"\"\"\ninput users_bool_exp {\n  \"\"\"\"\"\"\n  _and: [users_bool_exp]\n\n  \"\"\"\"\"\"\n  _not: users_bool_exp\n\n  \"\"\"\"\"\"\n  _or: [users_bool_exp]\n\n  \"\"\"\"\"\"\n  id: uuid_comparison_exp\n\n  \"\"\"\"\"\"\n  name: String_comparison_exp\n\n  \"\"\"\"\"\"\n  rocket: String_comparison_exp\n\n  \"\"\"\"\"\"\n  timestamp: timestamptz_comparison_exp\n\n  \"\"\"\"\"\"\n  twitter: String_comparison_exp\n}\n\n\"\"\"\nexpression to compare columns of type uuid. All fields are combined with logical 'AND'.\n\"\"\"\ninput uuid_comparison_exp {\n  \"\"\"\"\"\"\n  _eq: uuid\n\n  \"\"\"\"\"\"\n  _gt: uuid\n\n  \"\"\"\"\"\"\n  _gte: uuid\n\n  \"\"\"\"\"\"\n  _in: [uuid!]\n\n  \"\"\"\"\"\"\n  _is_null: Boolean\n\n  \"\"\"\"\"\"\n  _lt: uuid\n\n  \"\"\"\"\"\"\n  _lte: uuid\n\n  \"\"\"\"\"\"\n  _neq: uuid\n\n  \"\"\"\"\"\"\n  _nin: [uuid!]\n}\n\nscalar uuid\n\n\"\"\"\nexpression to compare columns of type String. All fields are combined with logical 'AND'.\n\"\"\"\ninput String_comparison_exp {\n  \"\"\"\"\"\"\n  _eq: String\n\n  \"\"\"\"\"\"\n  _gt: String\n\n  \"\"\"\"\"\"\n  _gte: String\n\n  \"\"\"\"\"\"\n  _ilike: String\n\n  \"\"\"\"\"\"\n  _in: [String!]\n\n  \"\"\"\"\"\"\n  _is_null: Boolean\n\n  \"\"\"\"\"\"\n  _like: String\n\n  \"\"\"\"\"\"\n  _lt: String\n\n  \"\"\"\"\"\"\n  _lte: String\n\n  \"\"\"\"\"\"\n  _neq: String\n\n  \"\"\"\"\"\"\n  _nilike: String\n\n  \"\"\"\"\"\"\n  _nin: [String!]\n\n  \"\"\"\"\"\"\n  _nlike: String\n\n  \"\"\"\"\"\"\n  _nsimilar: String\n\n  \"\"\"\"\"\"\n  _similar: String\n}\n\n\"\"\"\nexpression to compare columns of type timestamptz. All fields are combined with logical 'AND'.\n\"\"\"\ninput timestamptz_comparison_exp {\n  \"\"\"\"\"\"\n  _eq: timestamptz\n\n  \"\"\"\"\"\"\n  _gt: timestamptz\n\n  \"\"\"\"\"\"\n  _gte: timestamptz\n\n  \"\"\"\"\"\"\n  _in: [timestamptz!]\n\n  \"\"\"\"\"\"\n  _is_null: Boolean\n\n  \"\"\"\"\"\"\n  _lt: timestamptz\n\n  \"\"\"\"\"\"\n  _lte: timestamptz\n\n  \"\"\"\"\"\"\n  _neq: timestamptz\n\n  \"\"\"\"\"\"\n  _nin: [timestamptz!]\n}\n\nscalar timestamptz\n\n\"\"\"\ncolumns and relationships of \"users\"\n\"\"\"\ntype users {\n  \"\"\"\"\"\"\n  id: uuid!\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  rocket: String\n\n  \"\"\"\"\"\"\n  timestamp: timestamptz!\n\n  \"\"\"\"\"\"\n  twitter: String\n}\n\n\"\"\"\naggregated selection of \"users\"\n\"\"\"\ntype users_aggregate {\n  \"\"\"\"\"\"\n  aggregate: users_aggregate_fields\n\n  \"\"\"\"\"\"\n  nodes: [users!]!\n}\n\n\"\"\"\naggregate fields of \"users\"\n\"\"\"\ntype users_aggregate_fields {\n  \"\"\"\"\"\"\n  count(columns: [users_select_column!], distinct: Boolean): Int\n\n  \"\"\"\"\"\"\n  max: users_max_fields\n\n  \"\"\"\"\"\"\n  min: users_min_fields\n}\n\n\"\"\"aggregate max on columns\"\"\"\ntype users_max_fields {\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  rocket: String\n\n  \"\"\"\"\"\"\n  timestamp: timestamptz\n\n  \"\"\"\"\"\"\n  twitter: String\n}\n\n\"\"\"aggregate min on columns\"\"\"\ntype users_min_fields {\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  rocket: String\n\n  \"\"\"\"\"\"\n  timestamp: timestamptz\n\n  \"\"\"\"\"\"\n  twitter: String\n}\n\n\"\"\"\"\"\"\ninput CapsulesFind {\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  landings: Int\n\n  \"\"\"\"\"\"\n  mission: String\n\n  \"\"\"\"\"\"\n  original_launch: Date\n\n  \"\"\"\"\"\"\n  reuse_count: Int\n\n  \"\"\"\"\"\"\n  status: String\n\n  \"\"\"\"\"\"\n  type: String\n}\n\n\"\"\"\"\"\"\nscalar Date\n\n\"\"\"\"\"\"\ntype Capsule {\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  landings: Int\n\n  \"\"\"\"\"\"\n  missions: [CapsuleMission]\n\n  \"\"\"\"\"\"\n  original_launch: Date\n\n  \"\"\"\"\"\"\n  reuse_count: Int\n\n  \"\"\"\"\"\"\n  status: String\n\n  \"\"\"\"\"\"\n  type: String\n\n  \"\"\"\"\"\"\n  dragon: Dragon\n}\n\n\"\"\"\"\"\"\ntype CapsuleMission {\n  \"\"\"\"\"\"\n  flight: Int\n\n  \"\"\"\"\"\"\n  name: String\n}\n\n\"\"\"\"\"\"\ntype Dragon {\n  \"\"\"\"\"\"\n  active: Boolean\n\n  \"\"\"\"\"\"\n  crew_capacity: Int\n\n  \"\"\"\"\"\"\n  description: String\n\n  \"\"\"\"\"\"\n  diameter: Distance\n\n  \"\"\"\"\"\"\n  dry_mass_kg: Int\n\n  \"\"\"\"\"\"\n  dry_mass_lb: Int\n\n  \"\"\"\"\"\"\n  first_flight: String\n\n  \"\"\"\"\"\"\n  heat_shield: DragonHeatShield\n\n  \"\"\"\"\"\"\n  height_w_trunk: Distance\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  launch_payload_mass: Mass\n\n  \"\"\"\"\"\"\n  launch_payload_vol: Volume\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  orbit_duration_yr: Int\n\n  \"\"\"\"\"\"\n  pressurized_capsule: DragonPressurizedCapsule\n\n  \"\"\"\"\"\"\n  return_payload_mass: Mass\n\n  \"\"\"\"\"\"\n  return_payload_vol: Volume\n\n  \"\"\"\"\"\"\n  sidewall_angle_deg: Float\n\n  \"\"\"\"\"\"\n  thrusters: [DragonThrust]\n\n  \"\"\"\"\"\"\n  trunk: DragonTrunk\n\n  \"\"\"\"\"\"\n  type: String\n\n  \"\"\"\"\"\"\n  wikipedia: String\n}\n\n\"\"\"\"\"\"\ntype Distance {\n  \"\"\"\"\"\"\n  feet: Float\n\n  \"\"\"\"\"\"\n  meters: Float\n}\n\n\"\"\"\"\"\"\ntype DragonHeatShield {\n  \"\"\"\"\"\"\n  dev_partner: String\n\n  \"\"\"\"\"\"\n  material: String\n\n  \"\"\"\"\"\"\n  size_meters: Float\n\n  \"\"\"\"\"\"\n  temp_degrees: Int\n}\n\n\"\"\"\"\"\"\ntype Mass {\n  \"\"\"\"\"\"\n  kg: Int\n\n  \"\"\"\"\"\"\n  lb: Int\n}\n\n\"\"\"\"\"\"\ntype Volume {\n  \"\"\"\"\"\"\n  cubic_feet: Int\n\n  \"\"\"\"\"\"\n  cubic_meters: Int\n}\n\n\"\"\"\"\"\"\ntype DragonPressurizedCapsule {\n  \"\"\"\"\"\"\n  payload_volume: Volume\n}\n\n\"\"\"\"\"\"\ntype DragonThrust {\n  \"\"\"\"\"\"\n  amount: Int\n\n  \"\"\"\"\"\"\n  fuel_1: String\n\n  \"\"\"\"\"\"\n  fuel_2: String\n\n  \"\"\"\"\"\"\n  pods: Int\n\n  \"\"\"\"\"\"\n  thrust: Force\n\n  \"\"\"\"\"\"\n  type: String\n}\n\n\"\"\"\"\"\"\ntype Force {\n  \"\"\"\"\"\"\n  kN: Float\n\n  \"\"\"\"\"\"\n  lbf: Float\n}\n\n\"\"\"\"\"\"\ntype DragonTrunk {\n  \"\"\"\"\"\"\n  cargo: DragonTrunkCargo\n\n  \"\"\"\"\"\"\n  trunk_volume: Volume\n}\n\n\"\"\"\"\"\"\ntype DragonTrunkCargo {\n  \"\"\"\"\"\"\n  solar_array: Int\n\n  \"\"\"\"\"\"\n  unpressurized_cargo: Boolean\n}\n\n\"\"\"\"\"\"\ntype Info {\n  \"\"\"\"\"\"\n  ceo: String\n\n  \"\"\"\"\"\"\n  coo: String\n\n  \"\"\"\"\"\"\n  cto_propulsion: String\n\n  \"\"\"\"\"\"\n  cto: String\n\n  \"\"\"\"\"\"\n  employees: Int\n\n  \"\"\"\"\"\"\n  founded: Int\n\n  \"\"\"\"\"\"\n  founder: String\n\n  \"\"\"\"\"\"\n  headquarters: Address\n\n  \"\"\"\"\"\"\n  launch_sites: Int\n\n  \"\"\"\"\"\"\n  links: InfoLinks\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  summary: String\n\n  \"\"\"\"\"\"\n  test_sites: Int\n\n  \"\"\"\"\"\"\n  valuation: Float\n\n  \"\"\"\"\"\"\n  vehicles: Int\n}\n\n\"\"\"\"\"\"\ntype Address {\n  \"\"\"\"\"\"\n  address: String\n\n  \"\"\"\"\"\"\n  city: String\n\n  \"\"\"\"\"\"\n  state: String\n}\n\n\"\"\"\"\"\"\ntype InfoLinks {\n  \"\"\"\"\"\"\n  elon_twitter: String\n\n  \"\"\"\"\"\"\n  flickr: String\n\n  \"\"\"\"\"\"\n  twitter: String\n\n  \"\"\"\"\"\"\n  website: String\n}\n\n\"\"\"\"\"\"\ninput CoresFind {\n  \"\"\"\"\"\"\n  asds_attempts: Int\n\n  \"\"\"\"\"\"\n  asds_landings: Int\n\n  \"\"\"\"\"\"\n  block: Int\n\n  \"\"\"\"\"\"\n  id: String\n\n  \"\"\"\"\"\"\n  missions: String\n\n  \"\"\"\"\"\"\n  original_launch: Date\n\n  \"\"\"\"\"\"\n  reuse_count: Int\n\n  \"\"\"\"\"\"\n  rtls_attempts: Int\n\n  \"\"\"\"\"\"\n  rtls_landings: Int\n\n  \"\"\"\"\"\"\n  status: String\n\n  \"\"\"\"\"\"\n  water_landing: Boolean\n}\n\n\"\"\"\"\"\"\ntype Core {\n  \"\"\"\"\"\"\n  asds_attempts: Int\n\n  \"\"\"\"\"\"\n  asds_landings: Int\n\n  \"\"\"\"\"\"\n  block: Int\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  missions: [CapsuleMission]\n\n  \"\"\"\"\"\"\n  original_launch: Date\n\n  \"\"\"\"\"\"\n  reuse_count: Int\n\n  \"\"\"\"\"\"\n  rtls_attempts: Int\n\n  \"\"\"\"\"\"\n  rtls_landings: Int\n\n  \"\"\"\"\"\"\n  status: String\n\n  \"\"\"\"\"\"\n  water_landing: Boolean\n}\n\n\"\"\"\"\"\"\ninput HistoryFind {\n  \"\"\"\"\"\"\n  end: Date\n\n  \"\"\"\"\"\"\n  flight_number: Int\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  start: Date\n}\n\n\"\"\"\"\"\"\ntype History {\n  \"\"\"\"\"\"\n  details: String\n\n  \"\"\"\"\"\"\n  event_date_unix: Date\n\n  \"\"\"\"\"\"\n  event_date_utc: Date\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  links: Link\n\n  \"\"\"\"\"\"\n  title: String\n\n  \"\"\"\"\"\"\n  flight: Launch\n}\n\n\"\"\"\"\"\"\ntype Link {\n  \"\"\"\"\"\"\n  article: String\n\n  \"\"\"\"\"\"\n  reddit: String\n\n  \"\"\"\"\"\"\n  wikipedia: String\n}\n\n\"\"\"\"\"\"\ntype Launch {\n  \"\"\"\"\"\"\n  details: String\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  is_tentative: Boolean\n\n  \"\"\"\"\"\"\n  launch_date_local: Date\n\n  \"\"\"\"\"\"\n  launch_date_unix: Date\n\n  \"\"\"\"\"\"\n  launch_date_utc: Date\n\n  \"\"\"\"\"\"\n  launch_site: LaunchSite\n\n  \"\"\"\"\"\"\n  launch_success: Boolean\n\n  \"\"\"\"\"\"\n  launch_year: String\n\n  \"\"\"\"\"\"\n  links: LaunchLinks\n\n  \"\"\"\"\"\"\n  mission_id: [String]\n\n  \"\"\"\"\"\"\n  mission_name: String\n\n  \"\"\"\"\"\"\n  rocket: LaunchRocket\n\n  \"\"\"\"\"\"\n  static_fire_date_unix: Date\n\n  \"\"\"\"\"\"\n  static_fire_date_utc: Date\n\n  \"\"\"\"\"\"\n  telemetry: LaunchTelemetry\n\n  \"\"\"\"\"\"\n  tentative_max_precision: String\n\n  \"\"\"\"\"\"\n  upcoming: Boolean\n\n  \"\"\"\"\"\"\n  ships: [Ship]\n}\n\n\"\"\"\"\"\"\ntype LaunchSite {\n  \"\"\"\"\"\"\n  site_id: String\n\n  \"\"\"\"\"\"\n  site_name_long: String\n\n  \"\"\"\"\"\"\n  site_name: String\n}\n\n\"\"\"\"\"\"\ntype LaunchLinks {\n  \"\"\"\"\"\"\n  article_link: String\n\n  \"\"\"\"\"\"\n  flickr_images: [String]\n\n  \"\"\"\"\"\"\n  mission_patch_small: String\n\n  \"\"\"\"\"\"\n  mission_patch: String\n\n  \"\"\"\"\"\"\n  presskit: String\n\n  \"\"\"\"\"\"\n  reddit_campaign: String\n\n  \"\"\"\"\"\"\n  reddit_launch: String\n\n  \"\"\"\"\"\"\n  reddit_media: String\n\n  \"\"\"\"\"\"\n  reddit_recovery: String\n\n  \"\"\"\"\"\"\n  video_link: String\n\n  \"\"\"\"\"\"\n  wikipedia: String\n}\n\n\"\"\"\"\"\"\ntype LaunchRocket {\n  \"\"\"\"\"\"\n  fairings: LaunchRocketFairings\n\n  \"\"\"\"\"\"\n  first_stage: LaunchRocketFirstStage\n\n  \"\"\"\"\"\"\n  rocket_name: String\n\n  \"\"\"\"\"\"\n  rocket_type: String\n\n  \"\"\"\"\"\"\n  rocket: Rocket\n\n  \"\"\"\"\"\"\n  second_stage: LaunchRocketSecondStage\n}\n\n\"\"\"\"\"\"\ntype LaunchRocketFairings {\n  \"\"\"\"\"\"\n  recovered: Boolean\n\n  \"\"\"\"\"\"\n  recovery_attempt: Boolean\n\n  \"\"\"\"\"\"\n  reused: Boolean\n\n  \"\"\"\"\"\"\n  ship: String\n}\n\n\"\"\"\"\"\"\ntype LaunchRocketFirstStage {\n  \"\"\"\"\"\"\n  cores: [LaunchRocketFirstStageCore]\n}\n\n\"\"\"\"\"\"\ntype LaunchRocketFirstStageCore {\n  \"\"\"\"\"\"\n  block: Int\n\n  \"\"\"\"\"\"\n  core: Core\n\n  \"\"\"\"\"\"\n  flight: Int\n\n  \"\"\"\"\"\"\n  gridfins: Boolean\n\n  \"\"\"\"\"\"\n  land_success: Boolean\n\n  \"\"\"\"\"\"\n  landing_intent: Boolean\n\n  \"\"\"\"\"\"\n  landing_type: String\n\n  \"\"\"\"\"\"\n  landing_vehicle: String\n\n  \"\"\"\"\"\"\n  legs: Boolean\n\n  \"\"\"\"\"\"\n  reused: Boolean\n}\n\n\"\"\"\"\"\"\ntype Rocket {\n  \"\"\"\"\"\"\n  active: Boolean\n\n  \"\"\"\"\"\"\n  boosters: Int\n\n  \"\"\"\"\"\"\n  company: String\n\n  \"\"\"\"\"\"\n  cost_per_launch: Int\n\n  \"\"\"\"\"\"\n  country: String\n\n  \"\"\"\"\"\"\n  description: String\n\n  \"\"\"\"\"\"\n  diameter: Distance\n\n  \"\"\"\"\"\"\n  engines: RocketEngines\n\n  \"\"\"\"\"\"\n  first_flight: Date\n\n  \"\"\"\"\"\"\n  first_stage: RocketFirstStage\n\n  \"\"\"\"\"\"\n  height: Distance\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  landing_legs: RocketLandingLegs\n\n  \"\"\"\"\"\"\n  mass: Mass\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  payload_weights: [RocketPayloadWeight]\n\n  \"\"\"\"\"\"\n  second_stage: RocketSecondStage\n\n  \"\"\"\"\"\"\n  stages: Int\n\n  \"\"\"\"\"\"\n  success_rate_pct: Int\n\n  \"\"\"\"\"\"\n  type: String\n\n  \"\"\"\"\"\"\n  wikipedia: String\n}\n\n\"\"\"\"\"\"\ntype RocketEngines {\n  \"\"\"\"\"\"\n  number: Int\n\n  \"\"\"\"\"\"\n  type: String\n\n  \"\"\"\"\"\"\n  version: String\n\n  \"\"\"\"\"\"\n  layout: String\n\n  \"\"\"\"\"\"\n  engine_loss_max: String\n\n  \"\"\"\"\"\"\n  propellant_1: String\n\n  \"\"\"\"\"\"\n  propellant_2: String\n\n  \"\"\"\"\"\"\n  thrust_sea_level: Force\n\n  \"\"\"\"\"\"\n  thrust_vacuum: Force\n\n  \"\"\"\"\"\"\n  thrust_to_weight: Float\n}\n\n\"\"\"\"\"\"\ntype RocketFirstStage {\n  \"\"\"\"\"\"\n  burn_time_sec: Int\n\n  \"\"\"\"\"\"\n  engines: Int\n\n  \"\"\"\"\"\"\n  fuel_amount_tons: Float\n\n  \"\"\"\"\"\"\n  reusable: Boolean\n\n  \"\"\"\"\"\"\n  thrust_sea_level: Force\n\n  \"\"\"\"\"\"\n  thrust_vacuum: Force\n}\n\n\"\"\"\"\"\"\ntype RocketLandingLegs {\n  \"\"\"\"\"\"\n  number: Int\n\n  \"\"\"\"\"\"\n  material: String\n}\n\n\"\"\"\"\"\"\ntype RocketPayloadWeight {\n  \"\"\"\"\"\"\n  id: String\n\n  \"\"\"\"\"\"\n  kg: Int\n\n  \"\"\"\"\"\"\n  lb: Int\n\n  \"\"\"\"\"\"\n  name: String\n}\n\n\"\"\"\"\"\"\ntype RocketSecondStage {\n  \"\"\"\"\"\"\n  burn_time_sec: Int\n\n  \"\"\"\"\"\"\n  engines: Int\n\n  \"\"\"\"\"\"\n  fuel_amount_tons: Float\n\n  \"\"\"\"\"\"\n  payloads: RocketSecondStagePayloads\n\n  \"\"\"\"\"\"\n  thrust: Force\n}\n\n\"\"\"\"\"\"\ntype RocketSecondStagePayloads {\n  \"\"\"\"\"\"\n  option_1: String\n\n  \"\"\"\"\"\"\n  composite_fairing: RocketSecondStagePayloadCompositeFairing\n}\n\n\"\"\"\"\"\"\ntype RocketSecondStagePayloadCompositeFairing {\n  \"\"\"\"\"\"\n  height: Distance\n\n  \"\"\"\"\"\"\n  diameter: Distance\n}\n\n\"\"\"\"\"\"\ntype LaunchRocketSecondStage {\n  \"\"\"\"\"\"\n  block: Int\n\n  \"\"\"\"\"\"\n  payloads: [Payload]\n}\n\n\"\"\"\"\"\"\ntype Payload {\n  \"\"\"\"\"\"\n  customers: [String]\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  manufacturer: String\n\n  \"\"\"\"\"\"\n  nationality: String\n\n  \"\"\"\"\"\"\n  norad_id: [Int]\n\n  \"\"\"\"\"\"\n  orbit_params: PayloadOrbitParams\n\n  \"\"\"\"\"\"\n  orbit: String\n\n  \"\"\"\"\"\"\n  payload_mass_kg: Float\n\n  \"\"\"\"\"\"\n  payload_mass_lbs: Float\n\n  \"\"\"\"\"\"\n  payload_type: String\n\n  \"\"\"\"\"\"\n  reused: Boolean\n}\n\n\"\"\"\"\"\"\ntype PayloadOrbitParams {\n  \"\"\"\"\"\"\n  apoapsis_km: Float\n\n  \"\"\"\"\"\"\n  arg_of_pericenter: Float\n\n  \"\"\"\"\"\"\n  eccentricity: Float\n\n  \"\"\"\"\"\"\n  epoch: Date\n\n  \"\"\"\"\"\"\n  inclination_deg: Float\n\n  \"\"\"\"\"\"\n  lifespan_years: Float\n\n  \"\"\"\"\"\"\n  longitude: Float\n\n  \"\"\"\"\"\"\n  mean_anomaly: Float\n\n  \"\"\"\"\"\"\n  mean_motion: Float\n\n  \"\"\"\"\"\"\n  periapsis_km: Float\n\n  \"\"\"\"\"\"\n  period_min: Float\n\n  \"\"\"\"\"\"\n  raan: Float\n\n  \"\"\"\"\"\"\n  reference_system: String\n\n  \"\"\"\"\"\"\n  regime: String\n\n  \"\"\"\"\"\"\n  semi_major_axis_km: Float\n}\n\n\"\"\"\"\"\"\ntype LaunchTelemetry {\n  \"\"\"\"\"\"\n  flight_club: String\n}\n\n\"\"\"\"\"\"\ntype Ship {\n  \"\"\"\"\"\"\n  abs: Int\n\n  \"\"\"\"\"\"\n  active: Boolean\n\n  \"\"\"\"\"\"\n  attempted_landings: Int\n\n  \"\"\"\"\"\"\n  class: Int\n\n  \"\"\"\"\"\"\n  course_deg: Int\n\n  \"\"\"\"\"\"\n  home_port: String\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  image: String\n\n  \"\"\"\"\"\"\n  imo: Int\n\n  \"\"\"\"\"\"\n  missions: [ShipMission]\n\n  \"\"\"\"\"\"\n  mmsi: Int\n\n  \"\"\"\"\"\"\n  model: String\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  position: ShipLocation\n\n  \"\"\"\"\"\"\n  roles: [String]\n\n  \"\"\"\"\"\"\n  speed_kn: Float\n\n  \"\"\"\"\"\"\n  status: String\n\n  \"\"\"\"\"\"\n  successful_landings: Int\n\n  \"\"\"\"\"\"\n  type: String\n\n  \"\"\"\"\"\"\n  url: String\n\n  \"\"\"\"\"\"\n  weight_kg: Int\n\n  \"\"\"\"\"\"\n  weight_lbs: Int\n\n  \"\"\"\"\"\"\n  year_built: Int\n}\n\n\"\"\"\"\"\"\ntype ShipMission {\n  \"\"\"\"\"\"\n  flight: String\n\n  \"\"\"\"\"\"\n  name: String\n}\n\n\"\"\"\"\"\"\ntype ShipLocation {\n  \"\"\"\"\"\"\n  latitude: Float\n\n  \"\"\"\"\"\"\n  longitude: Float\n}\n\n\"\"\"\"\"\"\ntype HistoriesResult {\n  \"\"\"\"\"\"\n  result: Result\n\n  \"\"\"\"\"\"\n  data: [History]\n}\n\n\"\"\"\"\"\"\ntype Result {\n  \"\"\"\"\"\"\n  totalCount: Int\n}\n\n\"\"\"\"\"\"\ntype Landpad {\n  \"\"\"\"\"\"\n  attempted_landings: String\n\n  \"\"\"\"\"\"\n  details: String\n\n  \"\"\"\"\"\"\n  full_name: String\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  landing_type: String\n\n  \"\"\"\"\"\"\n  location: Location\n\n  \"\"\"\"\"\"\n  status: String\n\n  \"\"\"\"\"\"\n  successful_landings: String\n\n  \"\"\"\"\"\"\n  wikipedia: String\n}\n\n\"\"\"\"\"\"\ntype Location {\n  \"\"\"\"\"\"\n  latitude: Float\n\n  \"\"\"\"\"\"\n  longitude: Float\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  region: String\n}\n\n\"\"\"\"\"\"\ninput LaunchFind {\n  \"\"\"\"\"\"\n  apoapsis_km: Float\n\n  \"\"\"\"\"\"\n  block: Int\n\n  \"\"\"\"\"\"\n  cap_serial: String\n\n  \"\"\"\"\"\"\n  capsule_reuse: String\n\n  \"\"\"\"\"\"\n  core_flight: Int\n\n  \"\"\"\"\"\"\n  core_reuse: String\n\n  \"\"\"\"\"\"\n  core_serial: String\n\n  \"\"\"\"\"\"\n  customer: String\n\n  \"\"\"\"\"\"\n  eccentricity: Float\n\n  \"\"\"\"\"\"\n  end: Date\n\n  \"\"\"\"\"\"\n  epoch: Date\n\n  \"\"\"\"\"\"\n  fairings_recovered: String\n\n  \"\"\"\"\"\"\n  fairings_recovery_attempt: String\n\n  \"\"\"\"\"\"\n  fairings_reuse: String\n\n  \"\"\"\"\"\"\n  fairings_reused: String\n\n  \"\"\"\"\"\"\n  fairings_ship: String\n\n  \"\"\"\"\"\"\n  gridfins: String\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  inclination_deg: Float\n\n  \"\"\"\"\"\"\n  land_success: String\n\n  \"\"\"\"\"\"\n  landing_intent: String\n\n  \"\"\"\"\"\"\n  landing_type: String\n\n  \"\"\"\"\"\"\n  landing_vehicle: String\n\n  \"\"\"\"\"\"\n  launch_date_local: Date\n\n  \"\"\"\"\"\"\n  launch_date_utc: Date\n\n  \"\"\"\"\"\"\n  launch_success: String\n\n  \"\"\"\"\"\"\n  launch_year: String\n\n  \"\"\"\"\"\"\n  legs: String\n\n  \"\"\"\"\"\"\n  lifespan_years: Float\n\n  \"\"\"\"\"\"\n  longitude: Float\n\n  \"\"\"\"\"\"\n  manufacturer: String\n\n  \"\"\"\"\"\"\n  mean_motion: Float\n\n  \"\"\"\"\"\"\n  mission_id: String\n\n  \"\"\"\"\"\"\n  mission_name: String\n\n  \"\"\"\"\"\"\n  nationality: String\n\n  \"\"\"\"\"\"\n  norad_id: Int\n\n  \"\"\"\"\"\"\n  orbit: String\n\n  \"\"\"\"\"\"\n  payload_id: String\n\n  \"\"\"\"\"\"\n  payload_type: String\n\n  \"\"\"\"\"\"\n  periapsis_km: Float\n\n  \"\"\"\"\"\"\n  period_min: Float\n\n  \"\"\"\"\"\"\n  raan: Float\n\n  \"\"\"\"\"\"\n  reference_system: String\n\n  \"\"\"\"\"\"\n  regime: String\n\n  \"\"\"\"\"\"\n  reused: String\n\n  \"\"\"\"\"\"\n  rocket_id: String\n\n  \"\"\"\"\"\"\n  rocket_name: String\n\n  \"\"\"\"\"\"\n  rocket_type: String\n\n  \"\"\"\"\"\"\n  second_stage_block: String\n\n  \"\"\"\"\"\"\n  semi_major_axis_km: Float\n\n  \"\"\"\"\"\"\n  ship: String\n\n  \"\"\"\"\"\"\n  side_core1_reuse: String\n\n  \"\"\"\"\"\"\n  side_core2_reuse: String\n\n  \"\"\"\"\"\"\n  site_id: String\n\n  \"\"\"\"\"\"\n  site_name_long: String\n\n  \"\"\"\"\"\"\n  site_name: String\n\n  \"\"\"\"\"\"\n  start: Date\n\n  \"\"\"\"\"\"\n  tbd: String\n\n  \"\"\"\"\"\"\n  tentative_max_precision: String\n\n  \"\"\"\"\"\"\n  tentative: String\n}\n\n\"\"\"\"\"\"\ntype LaunchesPastResult {\n  \"\"\"\"\"\"\n  result: Result\n\n  \"\"\"\"\"\"\n  data: [Launch]\n}\n\n\"\"\"\"\"\"\ntype Launchpad {\n  \"\"\"\"\"\"\n  attempted_launches: Int\n\n  \"\"\"\"\"\"\n  details: String\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  location: Location\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  status: String\n\n  \"\"\"\"\"\"\n  successful_launches: Int\n\n  \"\"\"\"\"\"\n  vehicles_launched: [Rocket]\n\n  \"\"\"\"\"\"\n  wikipedia: String\n}\n\n\"\"\"\"\"\"\ninput MissionsFind {\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  manufacturer: String\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  payload_id: String\n}\n\n\"\"\"\"\"\"\ntype Mission {\n  \"\"\"\"\"\"\n  description: String\n\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  manufacturers: [String]\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  twitter: String\n\n  \"\"\"\"\"\"\n  website: String\n\n  \"\"\"\"\"\"\n  wikipedia: String\n\n  \"\"\"\"\"\"\n  payloads: [Payload]\n}\n\n\"\"\"\"\"\"\ntype MissionResult {\n  \"\"\"\"\"\"\n  result: Result\n\n  \"\"\"\"\"\"\n  data: [Mission]\n}\n\n\"\"\"\"\"\"\ninput PayloadsFind {\n  \"\"\"\"\"\"\n  apoapsis_km: Float\n\n  \"\"\"\"\"\"\n  customer: String\n\n  \"\"\"\"\"\"\n  eccentricity: Float\n\n  \"\"\"\"\"\"\n  epoch: Date\n\n  \"\"\"\"\"\"\n  inclination_deg: Float\n\n  \"\"\"\"\"\"\n  lifespan_years: Float\n\n  \"\"\"\"\"\"\n  longitude: Float\n\n  \"\"\"\"\"\"\n  manufacturer: String\n\n  \"\"\"\"\"\"\n  mean_motion: Float\n\n  \"\"\"\"\"\"\n  nationality: String\n\n  \"\"\"\"\"\"\n  norad_id: Int\n\n  \"\"\"\"\"\"\n  orbit: String\n\n  \"\"\"\"\"\"\n  payload_id: ID\n\n  \"\"\"\"\"\"\n  payload_type: String\n\n  \"\"\"\"\"\"\n  periapsis_km: Float\n\n  \"\"\"\"\"\"\n  period_min: Float\n\n  \"\"\"\"\"\"\n  raan: Float\n\n  \"\"\"\"\"\"\n  reference_system: String\n\n  \"\"\"\"\"\"\n  regime: String\n\n  \"\"\"\"\"\"\n  reused: Boolean\n\n  \"\"\"\"\"\"\n  semi_major_axis_km: Float\n}\n\n\"\"\"\"\"\"\ntype Roadster {\n  \"\"\"\"\"\"\n  apoapsis_au: Float\n\n  \"\"\"\"\"\"\n  details: String\n\n  \"\"\"\"\"\"\n  earth_distance_km: Float\n\n  \"\"\"\"\"\"\n  earth_distance_mi: Float\n\n  \"\"\"\"\"\"\n  eccentricity: Float\n\n  \"\"\"\"\"\"\n  epoch_jd: Float\n\n  \"\"\"\"\"\"\n  inclination: Float\n\n  \"\"\"\"\"\"\n  launch_date_unix: Date\n\n  \"\"\"\"\"\"\n  launch_date_utc: Date\n\n  \"\"\"\"\"\"\n  launch_mass_kg: Int\n\n  \"\"\"\"\"\"\n  launch_mass_lbs: Int\n\n  \"\"\"\"\"\"\n  longitude: Float\n\n  \"\"\"\"\"\"\n  mars_distance_km: Float\n\n  \"\"\"\"\"\"\n  mars_distance_mi: Float\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  norad_id: Int\n\n  \"\"\"\"\"\"\n  orbit_type: Float\n\n  \"\"\"\"\"\"\n  periapsis_arg: Float\n\n  \"\"\"\"\"\"\n  periapsis_au: Float\n\n  \"\"\"\"\"\"\n  period_days: Float\n\n  \"\"\"\"\"\"\n  semi_major_axis_au: Float\n\n  \"\"\"\"\"\"\n  speed_kph: Float\n\n  \"\"\"\"\"\"\n  speed_mph: Float\n\n  \"\"\"\"\"\"\n  wikipedia: String\n}\n\n\"\"\"\"\"\"\ntype RocketsResult {\n  \"\"\"\"\"\"\n  result: Result\n\n  \"\"\"\"\"\"\n  data: [Rocket]\n}\n\n\"\"\"\"\"\"\ninput ShipsFind {\n  \"\"\"\"\"\"\n  id: ID\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  model: String\n\n  \"\"\"\"\"\"\n  type: String\n\n  \"\"\"\"\"\"\n  role: String\n\n  \"\"\"\"\"\"\n  active: Boolean\n\n  \"\"\"\"\"\"\n  imo: Int\n\n  \"\"\"\"\"\"\n  mmsi: Int\n\n  \"\"\"\"\"\"\n  abs: Int\n\n  \"\"\"\"\"\"\n  class: Int\n\n  \"\"\"\"\"\"\n  weight_lbs: Int\n\n  \"\"\"\"\"\"\n  weight_kg: Int\n\n  \"\"\"\"\"\"\n  year_built: Int\n\n  \"\"\"\"\"\"\n  home_port: String\n\n  \"\"\"\"\"\"\n  status: String\n\n  \"\"\"\"\"\"\n  speed_kn: Int\n\n  \"\"\"\"\"\"\n  course_deg: Int\n\n  \"\"\"\"\"\"\n  latitude: Float\n\n  \"\"\"\"\"\"\n  longitude: Float\n\n  \"\"\"\"\"\"\n  successful_landings: Int\n\n  \"\"\"\"\"\"\n  attempted_landings: Int\n\n  \"\"\"\"\"\"\n  mission: String\n}\n\n\"\"\"\"\"\"\ntype ShipsResult {\n  \"\"\"\"\"\"\n  result: Result\n\n  \"\"\"\"\"\"\n  data: [Ship]\n}\n\ntype Mutation {\n  \"\"\"\n  delete data from the table: \"users\"\n  \"\"\"\n  delete_users(\n    \"\"\"filter the rows which have to be deleted\"\"\"\n    where: users_bool_exp!\n  ): users_mutation_response\n\n  \"\"\"\n  insert data into the table: \"users\"\n  \"\"\"\n  insert_users(\n    \"\"\"the rows to be inserted\"\"\"\n    objects: [users_insert_input!]!\n\n    \"\"\"on conflict condition\"\"\"\n    on_conflict: users_on_conflict\n  ): users_mutation_response\n\n  \"\"\"\n  update data of the table: \"users\"\n  \"\"\"\n  update_users(\n    \"\"\"sets the columns of the filtered rows to the given values\"\"\"\n    _set: users_set_input\n\n    \"\"\"filter the rows which have to be updated\"\"\"\n    where: users_bool_exp!\n  ): users_mutation_response\n}\n\n\"\"\"\nresponse of any mutation on the table \"users\"\n\"\"\"\ntype users_mutation_response {\n  \"\"\"number of affected rows by the mutation\"\"\"\n  affected_rows: Int!\n\n  \"\"\"data of the affected rows by the mutation\"\"\"\n  returning: [users!]!\n}\n\n\"\"\"\ninput type for inserting data into table \"users\"\n\"\"\"\ninput users_insert_input {\n  \"\"\"\"\"\"\n  id: uuid\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  rocket: String\n\n  \"\"\"\"\"\"\n  timestamp: timestamptz\n\n  \"\"\"\"\"\"\n  twitter: String\n}\n\n\"\"\"\non conflict condition type for table \"users\"\n\"\"\"\ninput users_on_conflict {\n  \"\"\"\"\"\"\n  constraint: users_constraint!\n\n  \"\"\"\"\"\"\n  update_columns: [users_update_column!]!\n}\n\n\"\"\"\nunique or primary key constraints on table \"users\"\n\"\"\"\nenum users_constraint {\n  \"\"\"unique or primary key constraint\"\"\"\n  users_pkey\n}\n\n\"\"\"\nupdate columns of table \"users\"\n\"\"\"\nenum users_update_column {\n  \"\"\"column name\"\"\"\n  id\n\n  \"\"\"column name\"\"\"\n  name\n\n  \"\"\"column name\"\"\"\n  rocket\n\n  \"\"\"column name\"\"\"\n  timestamp\n\n  \"\"\"column name\"\"\"\n  twitter\n}\n\n\"\"\"\ninput type for updating data in table \"users\"\n\"\"\"\ninput users_set_input {\n  \"\"\"\"\"\"\n  id: uuid\n\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  rocket: String\n\n  \"\"\"\"\"\"\n  timestamp: timestamptz\n\n  \"\"\"\"\"\"\n  twitter: String\n}\n\ntype Subscription {\n  \"\"\"\n  fetch data from the table: \"users\"\n  \"\"\"\n  users(\n    \"\"\"distinct select on columns\"\"\"\n    distinct_on: [users_select_column!]\n\n    \"\"\"limit the nuber of rows returned\"\"\"\n    limit: Int\n\n    \"\"\"skip the first n rows. Use only with order_by\"\"\"\n    offset: Int\n\n    \"\"\"sort the rows by one or more columns\"\"\"\n    order_by: [users_order_by!]\n\n    \"\"\"filter the rows returned\"\"\"\n    where: users_bool_exp\n  ): [users!]!\n\n  \"\"\"\n  fetch aggregated fields from the table: \"users\"\n  \"\"\"\n  users_aggregate(\n    \"\"\"distinct select on columns\"\"\"\n    distinct_on: [users_select_column!]\n\n    \"\"\"limit the nuber of rows returned\"\"\"\n    limit: Int\n\n    \"\"\"skip the first n rows. Use only with order_by\"\"\"\n    offset: Int\n\n    \"\"\"sort the rows by one or more columns\"\"\"\n    order_by: [users_order_by!]\n\n    \"\"\"filter the rows returned\"\"\"\n    where: users_bool_exp\n  ): users_aggregate!\n\n  \"\"\"fetch data from the table: \"users\" using primary key columns\"\"\"\n  users_by_pk(id: uuid!): users\n}\n\n\"\"\"conflict action\"\"\"\nenum conflict_action {\n  \"\"\"ignore the insert on this row\"\"\"\n  ignore\n\n  \"\"\"update the row with the given values\"\"\"\n  update\n}\n\n\"\"\"\norder by aggregate values of table \"users\"\n\"\"\"\ninput users_aggregate_order_by {\n  \"\"\"\"\"\"\n  count: order_by\n\n  \"\"\"\"\"\"\n  max: users_max_order_by\n\n  \"\"\"\"\"\"\n  min: users_min_order_by\n}\n\n\"\"\"\norder by max() on columns of table \"users\"\n\"\"\"\ninput users_max_order_by {\n  \"\"\"\"\"\"\n  name: order_by\n\n  \"\"\"\"\"\"\n  rocket: order_by\n\n  \"\"\"\"\"\"\n  timestamp: order_by\n\n  \"\"\"\"\"\"\n  twitter: order_by\n}\n\n\"\"\"\norder by min() on columns of table \"users\"\n\"\"\"\ninput users_min_order_by {\n  \"\"\"\"\"\"\n  name: order_by\n\n  \"\"\"\"\"\"\n  rocket: order_by\n\n  \"\"\"\"\"\"\n  timestamp: order_by\n\n  \"\"\"\"\"\"\n  twitter: order_by\n}\n\n\"\"\"\ninput type for inserting array relation for remote table \"users\"\n\"\"\"\ninput users_arr_rel_insert_input {\n  \"\"\"\"\"\"\n  data: [users_insert_input!]!\n\n  \"\"\"\"\"\"\n  on_conflict: users_on_conflict\n}\n\n\"\"\"\ninput type for inserting object relation for remote table \"users\"\n\"\"\"\ninput users_obj_rel_insert_input {\n  \"\"\"\"\"\"\n  data: users_insert_input!\n\n  \"\"\"\"\"\"\n  on_conflict: users_on_conflict\n}\n\n\"\"\"\"\"\"\nscalar ObjectID\n\n\"\"\"\"\"\"\ntype CoreMission {\n  \"\"\"\"\"\"\n  name: String\n\n  \"\"\"\"\"\"\n  flight: Int\n}"
+          },
+          "rootNodes": [
+            {
+              "typeName": "Query",
+              "fieldNames": [
+                "spacex_users",
+                "spacex_users_aggregate",
+                "spacex_users_by_pk",
+                "spacex_capsules",
+                "spacex_capsulesPast",
+                "spacex_capsulesUpcoming",
+                "spacex_capsule",
+                "spacex_company",
+                "spacex_cores",
+                "spacex_coresPast",
+                "spacex_coresUpcoming",
+                "spacex_core",
+                "spacex_dragons",
+                "spacex_dragon",
+                "spacex_histories",
+                "spacex_historiesResult",
+                "spacex_history",
+                "spacex_landpads",
+                "spacex_landpad",
+                "spacex_launches",
+                "spacex_launchesPast",
+                "spacex_launchesPastResult",
+                "spacex_launchesUpcoming",
+                "spacex_launch",
+                "spacex_launchLatest",
+                "spacex_launchNext",
+                "spacex_launchpads",
+                "spacex_launchpad",
+                "spacex_missions",
+                "spacex_missionsResult",
+                "spacex_mission",
+                "spacex_payloads",
+                "spacex_payload",
+                "spacex_roadster",
+                "spacex_rockets",
+                "spacex_rocketsResult",
+                "spacex_rocket",
+                "spacex_ships",
+                "spacex_shipsResult",
+                "spacex_ship"
+              ]
+            },
+            {
+              "typeName": "Mutation",
+              "fieldNames": [
+                "spacex_delete_users",
+                "spacex_insert_users",
+                "spacex_update_users"
+              ]
+            },
+            {
+              "typeName": "Subscription",
+              "fieldNames": [
+                "spacex_users",
+                "spacex_users_aggregate",
+                "spacex_users_by_pk"
+              ]
+            }
+          ],
+          "childNodes": [
+            {
+              "typeName": "spacex_users",
+              "fieldNames": [
+                "id",
+                "name",
+                "rocket",
+                "timestamp",
+                "twitter"
+              ]
+            },
+            {
+              "typeName": "spacex_users_aggregate",
+              "fieldNames": [
+                "aggregate",
+                "nodes"
+              ]
+            },
+            {
+              "typeName": "spacex_users_aggregate_fields",
+              "fieldNames": [
+                "count",
+                "max",
+                "min"
+              ]
+            },
+            {
+              "typeName": "spacex_users_max_fields",
+              "fieldNames": [
+                "name",
+                "rocket",
+                "timestamp",
+                "twitter"
+              ]
+            },
+            {
+              "typeName": "spacex_users_min_fields",
+              "fieldNames": [
+                "name",
+                "rocket",
+                "timestamp",
+                "twitter"
+              ]
+            },
+            {
+              "typeName": "spacex_Capsule",
+              "fieldNames": [
+                "id",
+                "landings",
+                "missions",
+                "original_launch",
+                "reuse_count",
+                "status",
+                "type",
+                "dragon"
+              ]
+            },
+            {
+              "typeName": "spacex_CapsuleMission",
+              "fieldNames": [
+                "flight",
+                "name"
+              ]
+            },
+            {
+              "typeName": "spacex_Dragon",
+              "fieldNames": [
+                "active",
+                "crew_capacity",
+                "description",
+                "diameter",
+                "dry_mass_kg",
+                "dry_mass_lb",
+                "first_flight",
+                "heat_shield",
+                "height_w_trunk",
+                "id",
+                "launch_payload_mass",
+                "launch_payload_vol",
+                "name",
+                "orbit_duration_yr",
+                "pressurized_capsule",
+                "return_payload_mass",
+                "return_payload_vol",
+                "sidewall_angle_deg",
+                "thrusters",
+                "trunk",
+                "type",
+                "wikipedia"
+              ]
+            },
+            {
+              "typeName": "spacex_Distance",
+              "fieldNames": [
+                "feet",
+                "meters"
+              ]
+            },
+            {
+              "typeName": "spacex_DragonHeatShield",
+              "fieldNames": [
+                "dev_partner",
+                "material",
+                "size_meters",
+                "temp_degrees"
+              ]
+            },
+            {
+              "typeName": "spacex_Mass",
+              "fieldNames": [
+                "kg",
+                "lb"
+              ]
+            },
+            {
+              "typeName": "spacex_Volume",
+              "fieldNames": [
+                "cubic_feet",
+                "cubic_meters"
+              ]
+            },
+            {
+              "typeName": "spacex_DragonPressurizedCapsule",
+              "fieldNames": [
+                "payload_volume"
+              ]
+            },
+            {
+              "typeName": "spacex_DragonThrust",
+              "fieldNames": [
+                "amount",
+                "fuel_1",
+                "fuel_2",
+                "pods",
+                "thrust",
+                "type"
+              ]
+            },
+            {
+              "typeName": "spacex_Force",
+              "fieldNames": [
+                "kN",
+                "lbf"
+              ]
+            },
+            {
+              "typeName": "spacex_DragonTrunk",
+              "fieldNames": [
+                "cargo",
+                "trunk_volume"
+              ]
+            },
+            {
+              "typeName": "spacex_DragonTrunkCargo",
+              "fieldNames": [
+                "solar_array",
+                "unpressurized_cargo"
+              ]
+            },
+            {
+              "typeName": "spacex_Info",
+              "fieldNames": [
+                "ceo",
+                "coo",
+                "cto_propulsion",
+                "cto",
+                "employees",
+                "founded",
+                "founder",
+                "headquarters",
+                "launch_sites",
+                "links",
+                "name",
+                "summary",
+                "test_sites",
+                "valuation",
+                "vehicles"
+              ]
+            },
+            {
+              "typeName": "spacex_Address",
+              "fieldNames": [
+                "address",
+                "city",
+                "state"
+              ]
+            },
+            {
+              "typeName": "spacex_InfoLinks",
+              "fieldNames": [
+                "elon_twitter",
+                "flickr",
+                "twitter",
+                "website"
+              ]
+            },
+            {
+              "typeName": "spacex_Core",
+              "fieldNames": [
+                "asds_attempts",
+                "asds_landings",
+                "block",
+                "id",
+                "missions",
+                "original_launch",
+                "reuse_count",
+                "rtls_attempts",
+                "rtls_landings",
+                "status",
+                "water_landing"
+              ]
+            },
+            {
+              "typeName": "spacex_History",
+              "fieldNames": [
+                "details",
+                "event_date_unix",
+                "event_date_utc",
+                "id",
+                "links",
+                "title",
+                "flight"
+              ]
+            },
+            {
+              "typeName": "spacex_Link",
+              "fieldNames": [
+                "article",
+                "reddit",
+                "wikipedia"
+              ]
+            },
+            {
+              "typeName": "spacex_Launch",
+              "fieldNames": [
+                "details",
+                "id",
+                "is_tentative",
+                "launch_date_local",
+                "launch_date_unix",
+                "launch_date_utc",
+                "launch_site",
+                "launch_success",
+                "launch_year",
+                "links",
+                "mission_id",
+                "mission_name",
+                "rocket",
+                "static_fire_date_unix",
+                "static_fire_date_utc",
+                "telemetry",
+                "tentative_max_precision",
+                "upcoming",
+                "ships"
+              ]
+            },
+            {
+              "typeName": "spacex_LaunchSite",
+              "fieldNames": [
+                "site_id",
+                "site_name_long",
+                "site_name"
+              ]
+            },
+            {
+              "typeName": "spacex_LaunchLinks",
+              "fieldNames": [
+                "article_link",
+                "flickr_images",
+                "mission_patch_small",
+                "mission_patch",
+                "presskit",
+                "reddit_campaign",
+                "reddit_launch",
+                "reddit_media",
+                "reddit_recovery",
+                "video_link",
+                "wikipedia"
+              ]
+            },
+            {
+              "typeName": "spacex_LaunchRocket",
+              "fieldNames": [
+                "fairings",
+                "first_stage",
+                "rocket_name",
+                "rocket_type",
+                "rocket",
+                "second_stage"
+              ]
+            },
+            {
+              "typeName": "spacex_LaunchRocketFairings",
+              "fieldNames": [
+                "recovered",
+                "recovery_attempt",
+                "reused",
+                "ship"
+              ]
+            },
+            {
+              "typeName": "spacex_LaunchRocketFirstStage",
+              "fieldNames": [
+                "cores"
+              ]
+            },
+            {
+              "typeName": "spacex_LaunchRocketFirstStageCore",
+              "fieldNames": [
+                "block",
+                "core",
+                "flight",
+                "gridfins",
+                "land_success",
+                "landing_intent",
+                "landing_type",
+                "landing_vehicle",
+                "legs",
+                "reused"
+              ]
+            },
+            {
+              "typeName": "spacex_Rocket",
+              "fieldNames": [
+                "active",
+                "boosters",
+                "company",
+                "cost_per_launch",
+                "country",
+                "description",
+                "diameter",
+                "engines",
+                "first_flight",
+                "first_stage",
+                "height",
+                "id",
+                "landing_legs",
+                "mass",
+                "name",
+                "payload_weights",
+                "second_stage",
+                "stages",
+                "success_rate_pct",
+                "type",
+                "wikipedia"
+              ]
+            },
+            {
+              "typeName": "spacex_RocketEngines",
+              "fieldNames": [
+                "number",
+                "type",
+                "version",
+                "layout",
+                "engine_loss_max",
+                "propellant_1",
+                "propellant_2",
+                "thrust_sea_level",
+                "thrust_vacuum",
+                "thrust_to_weight"
+              ]
+            },
+            {
+              "typeName": "spacex_RocketFirstStage",
+              "fieldNames": [
+                "burn_time_sec",
+                "engines",
+                "fuel_amount_tons",
+                "reusable",
+                "thrust_sea_level",
+                "thrust_vacuum"
+              ]
+            },
+            {
+              "typeName": "spacex_RocketLandingLegs",
+              "fieldNames": [
+                "number",
+                "material"
+              ]
+            },
+            {
+              "typeName": "spacex_RocketPayloadWeight",
+              "fieldNames": [
+                "id",
+                "kg",
+                "lb",
+                "name"
+              ]
+            },
+            {
+              "typeName": "spacex_RocketSecondStage",
+              "fieldNames": [
+                "burn_time_sec",
+                "engines",
+                "fuel_amount_tons",
+                "payloads",
+                "thrust"
+              ]
+            },
+            {
+              "typeName": "spacex_RocketSecondStagePayloads",
+              "fieldNames": [
+                "option_1",
+                "composite_fairing"
+              ]
+            },
+            {
+              "typeName": "spacex_RocketSecondStagePayloadCompositeFairing",
+              "fieldNames": [
+                "height",
+                "diameter"
+              ]
+            },
+            {
+              "typeName": "spacex_LaunchRocketSecondStage",
+              "fieldNames": [
+                "block",
+                "payloads"
+              ]
+            },
+            {
+              "typeName": "spacex_Payload",
+              "fieldNames": [
+                "customers",
+                "id",
+                "manufacturer",
+                "nationality",
+                "norad_id",
+                "orbit_params",
+                "orbit",
+                "payload_mass_kg",
+                "payload_mass_lbs",
+                "payload_type",
+                "reused"
+              ]
+            },
+            {
+              "typeName": "spacex_PayloadOrbitParams",
+              "fieldNames": [
+                "apoapsis_km",
+                "arg_of_pericenter",
+                "eccentricity",
+                "epoch",
+                "inclination_deg",
+                "lifespan_years",
+                "longitude",
+                "mean_anomaly",
+                "mean_motion",
+                "periapsis_km",
+                "period_min",
+                "raan",
+                "reference_system",
+                "regime",
+                "semi_major_axis_km"
+              ]
+            },
+            {
+              "typeName": "spacex_LaunchTelemetry",
+              "fieldNames": [
+                "flight_club"
+              ]
+            },
+            {
+              "typeName": "spacex_Ship",
+              "fieldNames": [
+                "abs",
+                "active",
+                "attempted_landings",
+                "class",
+                "course_deg",
+                "home_port",
+                "id",
+                "image",
+                "imo",
+                "missions",
+                "mmsi",
+                "model",
+                "name",
+                "position",
+                "roles",
+                "speed_kn",
+                "status",
+                "successful_landings",
+                "type",
+                "url",
+                "weight_kg",
+                "weight_lbs",
+                "year_built"
+              ]
+            },
+            {
+              "typeName": "spacex_ShipMission",
+              "fieldNames": [
+                "flight",
+                "name"
+              ]
+            },
+            {
+              "typeName": "spacex_ShipLocation",
+              "fieldNames": [
+                "latitude",
+                "longitude"
+              ]
+            },
+            {
+              "typeName": "spacex_HistoriesResult",
+              "fieldNames": [
+                "result",
+                "data"
+              ]
+            },
+            {
+              "typeName": "spacex_Result",
+              "fieldNames": [
+                "totalCount"
+              ]
+            },
+            {
+              "typeName": "spacex_Landpad",
+              "fieldNames": [
+                "attempted_landings",
+                "details",
+                "full_name",
+                "id",
+                "landing_type",
+                "location",
+                "status",
+                "successful_landings",
+                "wikipedia"
+              ]
+            },
+            {
+              "typeName": "spacex_Location",
+              "fieldNames": [
+                "latitude",
+                "longitude",
+                "name",
+                "region"
+              ]
+            },
+            {
+              "typeName": "spacex_LaunchesPastResult",
+              "fieldNames": [
+                "result",
+                "data"
+              ]
+            },
+            {
+              "typeName": "spacex_Launchpad",
+              "fieldNames": [
+                "attempted_launches",
+                "details",
+                "id",
+                "location",
+                "name",
+                "status",
+                "successful_launches",
+                "vehicles_launched",
+                "wikipedia"
+              ]
+            },
+            {
+              "typeName": "spacex_Mission",
+              "fieldNames": [
+                "description",
+                "id",
+                "manufacturers",
+                "name",
+                "twitter",
+                "website",
+                "wikipedia",
+                "payloads"
+              ]
+            },
+            {
+              "typeName": "spacex_MissionResult",
+              "fieldNames": [
+                "result",
+                "data"
+              ]
+            },
+            {
+              "typeName": "spacex_Roadster",
+              "fieldNames": [
+                "apoapsis_au",
+                "details",
+                "earth_distance_km",
+                "earth_distance_mi",
+                "eccentricity",
+                "epoch_jd",
+                "inclination",
+                "launch_date_unix",
+                "launch_date_utc",
+                "launch_mass_kg",
+                "launch_mass_lbs",
+                "longitude",
+                "mars_distance_km",
+                "mars_distance_mi",
+                "name",
+                "norad_id",
+                "orbit_type",
+                "periapsis_arg",
+                "periapsis_au",
+                "period_days",
+                "semi_major_axis_au",
+                "speed_kph",
+                "speed_mph",
+                "wikipedia"
+              ]
+            },
+            {
+              "typeName": "spacex_RocketsResult",
+              "fieldNames": [
+                "result",
+                "data"
+              ]
+            },
+            {
+              "typeName": "spacex_ShipsResult",
+              "fieldNames": [
+                "result",
+                "data"
+              ]
+            },
+            {
+              "typeName": "spacex_users_mutation_response",
+              "fieldNames": [
+                "affected_rows",
+                "returning"
+              ]
+            },
+            {
+              "typeName": "spacex_CoreMission",
+              "fieldNames": [
+                "name",
+                "flight"
+              ]
+            }
+          ],
+          "overrideFieldPathFromAlias": true,
+          "directives": []
+        }
+      ],
+      "fieldConfigurations": [
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_users",
+          "argumentsConfiguration": [
+            {
+              "name": "distinct_on",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order_by",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "where",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "users"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_users_aggregate",
+          "argumentsConfiguration": [
+            {
+              "name": "distinct_on",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order_by",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "where",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "users_aggregate"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_users_by_pk",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "users_by_pk"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_capsules",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "capsules"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_capsulesPast",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "capsulesPast"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_capsulesUpcoming",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "capsulesUpcoming"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_capsule",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "capsule"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_cores",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "cores"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_coresPast",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "coresPast"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_coresUpcoming",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "coresUpcoming"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_core",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "core"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_dragons",
+          "argumentsConfiguration": [
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "dragons"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_dragon",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "dragon"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_histories",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "histories"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_historiesResult",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "historiesResult"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_history",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "history"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_landpads",
+          "argumentsConfiguration": [
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "landpads"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_landpad",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "landpad"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_launches",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "launches"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_launchesPast",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "launchesPast"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_launchesPastResult",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "launchesPastResult"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_launchesUpcoming",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "launchesUpcoming"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_launch",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "launch"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_launchLatest",
+          "argumentsConfiguration": [
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "launchLatest"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_launchNext",
+          "argumentsConfiguration": [
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "launchNext"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_launchpads",
+          "argumentsConfiguration": [
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "launchpads"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_launchpad",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "launchpad"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_missions",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "missions"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_missionsResult",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "missionsResult"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_mission",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "mission"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_payloads",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "payloads"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_payload",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "payload"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_rockets",
+          "argumentsConfiguration": [
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "rockets"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_rocketsResult",
+          "argumentsConfiguration": [
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "rocketsResult"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_rocket",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "rocket"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_ships",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "ships"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_shipsResult",
+          "argumentsConfiguration": [
+            {
+              "name": "find",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "sort",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "shipsResult"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_ship",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "ship"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "spacex_users_aggregate_fields",
+          "fieldName": "count",
+          "argumentsConfiguration": [
+            {
+              "name": "columns",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "distinct",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Mutation",
+          "fieldName": "spacex_delete_users",
+          "argumentsConfiguration": [
+            {
+              "name": "where",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "delete_users"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Mutation",
+          "fieldName": "spacex_insert_users",
+          "argumentsConfiguration": [
+            {
+              "name": "objects",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "on_conflict",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "insert_users"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Mutation",
+          "fieldName": "spacex_update_users",
+          "argumentsConfiguration": [
+            {
+              "name": "_set",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "where",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "update_users"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Subscription",
+          "fieldName": "spacex_users",
+          "argumentsConfiguration": [
+            {
+              "name": "distinct_on",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order_by",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "where",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "users"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Subscription",
+          "fieldName": "spacex_users_aggregate",
+          "argumentsConfiguration": [
+            {
+              "name": "distinct_on",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "limit",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "offset",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "order_by",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            },
+            {
+              "name": "where",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "users_aggregate"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Subscription",
+          "fieldName": "spacex_users_by_pk",
+          "argumentsConfiguration": [
+            {
+              "name": "id",
+              "sourceType": 1,
+              "sourcePath": [],
+              "renderConfiguration": 0
+            }
+          ],
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "users_by_pk"
+          ],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_company",
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "company"
+          ],
+          "argumentsConfiguration": [],
+          "requiresFields": []
+        },
+        {
+          "typeName": "Query",
+          "fieldName": "spacex_roadster",
+          "disableDefaultFieldMapping": false,
+          "path": [
+            "roadster"
+          ],
+          "argumentsConfiguration": [],
+          "requiresFields": []
+        }
+      ],
+      "typeConfigurations": [
+        {
+          "typeName": "spacex_users_select_column",
+          "renameTo": "users_select_column"
+        },
+        {
+          "typeName": "spacex_users_order_by",
+          "renameTo": "users_order_by"
+        },
+        {
+          "typeName": "spacex_order_by",
+          "renameTo": "order_by"
+        },
+        {
+          "typeName": "spacex_users_bool_exp",
+          "renameTo": "users_bool_exp"
+        },
+        {
+          "typeName": "spacex_uuid_comparison_exp",
+          "renameTo": "uuid_comparison_exp"
+        },
+        {
+          "typeName": "spacex_uuid",
+          "renameTo": "uuid"
+        },
+        {
+          "typeName": "spacex_String_comparison_exp",
+          "renameTo": "String_comparison_exp"
+        },
+        {
+          "typeName": "spacex_timestamptz_comparison_exp",
+          "renameTo": "timestamptz_comparison_exp"
+        },
+        {
+          "typeName": "spacex_timestamptz",
+          "renameTo": "timestamptz"
+        },
+        {
+          "typeName": "spacex_users",
+          "renameTo": "users"
+        },
+        {
+          "typeName": "spacex_users_aggregate",
+          "renameTo": "users_aggregate"
+        },
+        {
+          "typeName": "spacex_users_aggregate_fields",
+          "renameTo": "users_aggregate_fields"
+        },
+        {
+          "typeName": "spacex_users_max_fields",
+          "renameTo": "users_max_fields"
+        },
+        {
+          "typeName": "spacex_users_min_fields",
+          "renameTo": "users_min_fields"
+        },
+        {
+          "typeName": "spacex_CapsulesFind",
+          "renameTo": "CapsulesFind"
+        },
+        {
+          "typeName": "spacex_Date",
+          "renameTo": "Date"
+        },
+        {
+          "typeName": "spacex_Capsule",
+          "renameTo": "Capsule"
+        },
+        {
+          "typeName": "spacex_CapsuleMission",
+          "renameTo": "CapsuleMission"
+        },
+        {
+          "typeName": "spacex_Dragon",
+          "renameTo": "Dragon"
+        },
+        {
+          "typeName": "spacex_Distance",
+          "renameTo": "Distance"
+        },
+        {
+          "typeName": "spacex_DragonHeatShield",
+          "renameTo": "DragonHeatShield"
+        },
+        {
+          "typeName": "spacex_Mass",
+          "renameTo": "Mass"
+        },
+        {
+          "typeName": "spacex_Volume",
+          "renameTo": "Volume"
+        },
+        {
+          "typeName": "spacex_DragonPressurizedCapsule",
+          "renameTo": "DragonPressurizedCapsule"
+        },
+        {
+          "typeName": "spacex_DragonThrust",
+          "renameTo": "DragonThrust"
+        },
+        {
+          "typeName": "spacex_Force",
+          "renameTo": "Force"
+        },
+        {
+          "typeName": "spacex_DragonTrunk",
+          "renameTo": "DragonTrunk"
+        },
+        {
+          "typeName": "spacex_DragonTrunkCargo",
+          "renameTo": "DragonTrunkCargo"
+        },
+        {
+          "typeName": "spacex_Info",
+          "renameTo": "Info"
+        },
+        {
+          "typeName": "spacex_Address",
+          "renameTo": "Address"
+        },
+        {
+          "typeName": "spacex_InfoLinks",
+          "renameTo": "InfoLinks"
+        },
+        {
+          "typeName": "spacex_CoresFind",
+          "renameTo": "CoresFind"
+        },
+        {
+          "typeName": "spacex_Core",
+          "renameTo": "Core"
+        },
+        {
+          "typeName": "spacex_HistoryFind",
+          "renameTo": "HistoryFind"
+        },
+        {
+          "typeName": "spacex_History",
+          "renameTo": "History"
+        },
+        {
+          "typeName": "spacex_Link",
+          "renameTo": "Link"
+        },
+        {
+          "typeName": "spacex_Launch",
+          "renameTo": "Launch"
+        },
+        {
+          "typeName": "spacex_LaunchSite",
+          "renameTo": "LaunchSite"
+        },
+        {
+          "typeName": "spacex_LaunchLinks",
+          "renameTo": "LaunchLinks"
+        },
+        {
+          "typeName": "spacex_LaunchRocket",
+          "renameTo": "LaunchRocket"
+        },
+        {
+          "typeName": "spacex_LaunchRocketFairings",
+          "renameTo": "LaunchRocketFairings"
+        },
+        {
+          "typeName": "spacex_LaunchRocketFirstStage",
+          "renameTo": "LaunchRocketFirstStage"
+        },
+        {
+          "typeName": "spacex_LaunchRocketFirstStageCore",
+          "renameTo": "LaunchRocketFirstStageCore"
+        },
+        {
+          "typeName": "spacex_Rocket",
+          "renameTo": "Rocket"
+        },
+        {
+          "typeName": "spacex_RocketEngines",
+          "renameTo": "RocketEngines"
+        },
+        {
+          "typeName": "spacex_RocketFirstStage",
+          "renameTo": "RocketFirstStage"
+        },
+        {
+          "typeName": "spacex_RocketLandingLegs",
+          "renameTo": "RocketLandingLegs"
+        },
+        {
+          "typeName": "spacex_RocketPayloadWeight",
+          "renameTo": "RocketPayloadWeight"
+        },
+        {
+          "typeName": "spacex_RocketSecondStage",
+          "renameTo": "RocketSecondStage"
+        },
+        {
+          "typeName": "spacex_RocketSecondStagePayloads",
+          "renameTo": "RocketSecondStagePayloads"
+        },
+        {
+          "typeName": "spacex_RocketSecondStagePayloadCompositeFairing",
+          "renameTo": "RocketSecondStagePayloadCompositeFairing"
+        },
+        {
+          "typeName": "spacex_LaunchRocketSecondStage",
+          "renameTo": "LaunchRocketSecondStage"
+        },
+        {
+          "typeName": "spacex_Payload",
+          "renameTo": "Payload"
+        },
+        {
+          "typeName": "spacex_PayloadOrbitParams",
+          "renameTo": "PayloadOrbitParams"
+        },
+        {
+          "typeName": "spacex_LaunchTelemetry",
+          "renameTo": "LaunchTelemetry"
+        },
+        {
+          "typeName": "spacex_Ship",
+          "renameTo": "Ship"
+        },
+        {
+          "typeName": "spacex_ShipMission",
+          "renameTo": "ShipMission"
+        },
+        {
+          "typeName": "spacex_ShipLocation",
+          "renameTo": "ShipLocation"
+        },
+        {
+          "typeName": "spacex_HistoriesResult",
+          "renameTo": "HistoriesResult"
+        },
+        {
+          "typeName": "spacex_Result",
+          "renameTo": "Result"
+        },
+        {
+          "typeName": "spacex_Landpad",
+          "renameTo": "Landpad"
+        },
+        {
+          "typeName": "spacex_Location",
+          "renameTo": "Location"
+        },
+        {
+          "typeName": "spacex_LaunchFind",
+          "renameTo": "LaunchFind"
+        },
+        {
+          "typeName": "spacex_LaunchesPastResult",
+          "renameTo": "LaunchesPastResult"
+        },
+        {
+          "typeName": "spacex_Launchpad",
+          "renameTo": "Launchpad"
+        },
+        {
+          "typeName": "spacex_MissionsFind",
+          "renameTo": "MissionsFind"
+        },
+        {
+          "typeName": "spacex_Mission",
+          "renameTo": "Mission"
+        },
+        {
+          "typeName": "spacex_MissionResult",
+          "renameTo": "MissionResult"
+        },
+        {
+          "typeName": "spacex_PayloadsFind",
+          "renameTo": "PayloadsFind"
+        },
+        {
+          "typeName": "spacex_Roadster",
+          "renameTo": "Roadster"
+        },
+        {
+          "typeName": "spacex_RocketsResult",
+          "renameTo": "RocketsResult"
+        },
+        {
+          "typeName": "spacex_ShipsFind",
+          "renameTo": "ShipsFind"
+        },
+        {
+          "typeName": "spacex_ShipsResult",
+          "renameTo": "ShipsResult"
+        },
+        {
+          "typeName": "spacex_users_mutation_response",
+          "renameTo": "users_mutation_response"
+        },
+        {
+          "typeName": "spacex_users_insert_input",
+          "renameTo": "users_insert_input"
+        },
+        {
+          "typeName": "spacex_users_on_conflict",
+          "renameTo": "users_on_conflict"
+        },
+        {
+          "typeName": "spacex_users_constraint",
+          "renameTo": "users_constraint"
+        },
+        {
+          "typeName": "spacex_users_update_column",
+          "renameTo": "users_update_column"
+        },
+        {
+          "typeName": "spacex_users_set_input",
+          "renameTo": "users_set_input"
+        },
+        {
+          "typeName": "spacex_conflict_action",
+          "renameTo": "conflict_action"
+        },
+        {
+          "typeName": "spacex_users_aggregate_order_by",
+          "renameTo": "users_aggregate_order_by"
+        },
+        {
+          "typeName": "spacex_users_max_order_by",
+          "renameTo": "users_max_order_by"
+        },
+        {
+          "typeName": "spacex_users_min_order_by",
+          "renameTo": "users_min_order_by"
+        },
+        {
+          "typeName": "spacex_users_arr_rel_insert_input",
+          "renameTo": "users_arr_rel_insert_input"
+        },
+        {
+          "typeName": "spacex_users_obj_rel_insert_input",
+          "renameTo": "users_obj_rel_insert_input"
+        },
+        {
+          "typeName": "spacex_ObjectID",
+          "renameTo": "ObjectID"
+        },
+        {
+          "typeName": "spacex_CoreMission",
+          "renameTo": "CoreMission"
+        }
+      ]
+    },
+    "s3UploadConfiguration": [],
+    "corsConfiguration": {
+      "maxAge": 120,
+      "allowedHeaders": [
+        "*"
+      ],
+      "allowedMethods": [
+        "GET",
+        "POST"
+      ],
+      "exposedHeaders": [
+        "*"
+      ],
+      "allowCredentials": true,
+      "allowedOrigins": [
+        {
+          "kind": 0,
+          "environmentVariableDefaultValue": "",
+          "environmentVariableName": "",
+          "staticVariableContent": "http://localhost:3000"
+        }
+      ]
+    },
+    "authenticationConfig": {
+      "cookieBased": {
+        "providers": [],
+        "authorizedRedirectUris": [],
+        "authorizedRedirectUriRegexes": []
+      },
+      "hooks": {
+        "postAuthentication": false,
+        "mutatingPostAuthentication": false,
+        "revalidateAuthentication": false
+      }
+    },
+    "additionalHostNames": []
+  },
+  "dangerouslyEnableGraphQLEndpoint": false
+}
