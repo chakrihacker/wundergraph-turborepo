@@ -25,7 +25,9 @@
       "**/ui-native",
       "**/ui-native/**",
       "**/metro-*",
-      "**/metro-*/**"
+      "**/metro-*/**",
+      "**/@react-navigation",
+      "**/@react-navigation/**"
     ]
   },
   "scripts": {
